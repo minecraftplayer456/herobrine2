@@ -6,6 +6,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Herobrine extends JavaPlugin implements Listener {
 
+    private ConfigDB configDB;
     private Debug debug;
 
     @Override
@@ -13,12 +14,25 @@ public class Herobrine extends JavaPlugin implements Listener {
         //Initializing debugging
         debug = new Debug();
 
+        //Load configuration files
+        configDB = new ConfigDB();
+        configDB.startup(getDataFolder());
+
         //Register this class as event listener
         getServer().getPluginManager().registerEvents(this, this);
     }
 
     @Override
     public void onDisable() {
+        //Save configuration files
+        configDB.shutdown();
+    }
 
+    public Debug getDebug(){
+        return debug;
+    }
+
+    public ConfigDB getConfigDB(){
+        return configDB;
     }
 }

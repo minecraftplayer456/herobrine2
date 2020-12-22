@@ -8,7 +8,7 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 
-import net.theprogrammersworld.herobrine.ConfigDB;
+import net.theprogrammersworld.herobrine.ConfigDBOld;
 import net.theprogrammersworld.herobrine.HerobrineOld;
 import net.theprogrammersworld.herobrine.Utils;
 import net.theprogrammersworld.herobrine.AIold.AICore;
@@ -169,7 +169,7 @@ public class RandomPosition extends Core {
 
 			Location hbloc = (Location) PluginCore.HerobrineNPC.getBukkitEntity().getLocation();
 			World w = (World) hbloc.getWorld();
-			ConfigDB config = PluginCore.getConfigDB();
+			ConfigDBOld config = PluginCore.getConfigDB();
 			
 			if (hbloc.getBlockX() < config.WalkingModeXRadius + config.WalkingModeFromXRadius
 				&& hbloc.getBlockX() > (-config.WalkingModeXRadius) + config.WalkingModeFromXRadius

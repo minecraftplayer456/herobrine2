@@ -48,7 +48,7 @@ public class HerobrineOld extends JavaPlugin implements Listener {
 
 	private static HerobrineOld pluginCore;
 	private AICore aicore;
-	private ConfigDB configdb;
+	private ConfigDBOld configdb;
 	private Support support;
 	private EntityManager entMng;
 	private PathManager pathMng;
@@ -97,7 +97,7 @@ public class HerobrineOld extends JavaPlugin implements Listener {
 		
 		HerobrineOld.pluginCore = this;
 		
-		this.configdb = new ConfigDB(log);
+		this.configdb = new ConfigDBOld(log);
 
 		this.NPCman = new NPCCore(this);
 
@@ -239,7 +239,7 @@ public class HerobrineOld extends JavaPlugin implements Listener {
 		NPCman.removeAll();
 	}
 
-	public ConfigDB getConfigDB() {
+	public ConfigDBOld getConfigDB() {
 		return this.configdb;
 	}
 
