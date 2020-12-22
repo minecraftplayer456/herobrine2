@@ -2,11 +2,6 @@ plugins {
     id 'java-library'
 }
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
-}
-
 repositories {
     mavenCentral() // This is needed for dependencies.
     /*
@@ -28,6 +23,14 @@ repositories {
     }
 }
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+group "herobrine"
+version "2.1.2"
+
 dependencies {
     compileOnly 'org.spigotmc:spigot:1.16.4-R0.1-SNAPSHOT'  // The full Spigot server with no shadowing. Requires mavenLocal.
     implementation name: 'Factions'
@@ -39,4 +42,9 @@ dependencies {
     implementation name: 'Towny'
     implementation name: 'WorldEdit'
     implementation name: 'WorldGuard'
+}
+
+task copyPluginJar(dependsOn: jar, type: Copy){
+    from(jar.archiveFile)
+    into(projectDir.path + "/run/plugins")
 }
