@@ -12,7 +12,7 @@ import org.bukkit.World;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 
-import net.theprogrammersworld.herobrine.misc.CustomID;
+import net.theprogrammersworld.herobrine.miscold.CustomID;
 
 public class ConfigDB {
 

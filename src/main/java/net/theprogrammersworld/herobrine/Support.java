@@ -3,13 +3,13 @@ package net.theprogrammersworld.herobrine;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 
-import net.theprogrammersworld.herobrine.support.FactionsHook;
-import net.theprogrammersworld.herobrine.support.GriefPreventionHook;
-import net.theprogrammersworld.herobrine.support.PreciousStonesHook;
-import net.theprogrammersworld.herobrine.support.RedProtectHook;
-import net.theprogrammersworld.herobrine.support.ResidenceHook;
-import net.theprogrammersworld.herobrine.support.TownyHook;
-import net.theprogrammersworld.herobrine.support.WorldGuardHook;
+import net.theprogrammersworld.herobrine.supportold.FactionsHook;
+import net.theprogrammersworld.herobrine.supportold.GriefPreventionHook;
+import net.theprogrammersworld.herobrine.supportold.PreciousStonesHook;
+import net.theprogrammersworld.herobrine.supportold.RedProtectHook;
+import net.theprogrammersworld.herobrine.supportold.ResidenceHook;
+import net.theprogrammersworld.herobrine.supportold.TownyHook;
+import net.theprogrammersworld.herobrine.supportold.WorldGuardHook;
 
 public class Support {
 
