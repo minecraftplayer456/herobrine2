@@ -4,7 +4,7 @@ import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import net.minecraft.server.v1_16_R3.Entity;
 import net.minecraft.server.v1_16_R3.PlayerInteractManager;
-import net.theprogrammersworld.herobrine.Herobrine;
+import net.theprogrammersworld.herobrine.HerobrineOld;
 import net.theprogrammersworld.herobrine.NPCold.Entity.HumanEntity;
 import net.theprogrammersworld.herobrine.NPCold.Entity.HumanNPC;
 import net.theprogrammersworld.herobrine.NPCold.NMS.BServer;
@@ -35,8 +35,8 @@ public class NPCCore {
 
 	private GameProfile getHerobrineGameProfile() {
 		GameProfile profile = new GameProfile(
-											  UUID.fromString(Herobrine.getPluginCore().getConfigDB().HerobrineUUID),
-											  Herobrine.getPluginCore().getConfigDB().HerobrineName
+											  UUID.fromString(HerobrineOld.getPluginCore().getConfigDB().HerobrineUUID),
+											  HerobrineOld.getPluginCore().getConfigDB().HerobrineName
 											  );
 		
 		Property textures = new Property("textures",
@@ -55,7 +55,7 @@ public class NPCCore {
 		networkCore = new NetworkCore();
 		
 		
-		Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(Herobrine.getPluginCore(), new Runnable() {
+		Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(HerobrineOld.getPluginCore(), new Runnable() {
 			@Override
 			public void run() {
 				final ArrayList<HumanNPC> toRemove = new ArrayList<HumanNPC>();

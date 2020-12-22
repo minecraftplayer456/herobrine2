@@ -6,12 +6,12 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-import net.theprogrammersworld.herobrine.Herobrine;
+import net.theprogrammersworld.herobrine.HerobrineOld;
 import net.theprogrammersworld.herobrine.AIold.AICore;
 
 public class CmdAttack extends SubCommand {
 
-	public CmdAttack(Herobrine plugin, Logger log) {
+	public CmdAttack(HerobrineOld plugin, Logger log) {
 		super(plugin, log);
 	}
 

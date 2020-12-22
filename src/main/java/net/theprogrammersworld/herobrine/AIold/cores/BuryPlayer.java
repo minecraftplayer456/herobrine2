@@ -7,7 +7,7 @@ import org.bukkit.block.Block;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
 
-import net.theprogrammersworld.herobrine.Herobrine;
+import net.theprogrammersworld.herobrine.HerobrineOld;
 import net.theprogrammersworld.herobrine.AIold.Core;
 import net.theprogrammersworld.herobrine.AIold.CoreResult;
 
@@ -17,7 +17,7 @@ public class BuryPlayer extends Core {
 	public Block savedBlock2 = null;
 
 	public BuryPlayer() {
-		super(CoreType.BURY_PLAYER, AppearType.NORMAL, Herobrine.getPluginCore());
+		super(CoreType.BURY_PLAYER, AppearType.NORMAL, HerobrineOld.getPluginCore());
 	}
 
 	public CoreResult CallCore(Object[] data) {
@@ -25,7 +25,7 @@ public class BuryPlayer extends Core {
 	}
 	
 	public CoreResult FindPlace(final Player player) {
-		if (Herobrine.getPluginCore().getSupport().checkBuild(player.getLocation())) {
+		if (HerobrineOld.getPluginCore().getSupport().checkBuild(player.getLocation())) {
 			final Location loc = player.getLocation();
 			if (isSolidBlock(
 					loc.getWorld().getBlockAt(loc.getBlockX(), loc.getBlockY() - 1, loc.getBlockZ()).getType())
@@ -45,23 +45,23 @@ public class BuryPlayer extends Core {
 							.getBlockAt(loc.getBlockX(), loc.getBlockY() - 2, loc.getBlockZ() - 1).getType())
 					&& isSolidBlock(loc.getWorld()
 							.getBlockAt(loc.getBlockX(), loc.getBlockY() - 1, loc.getBlockZ() - 2).getType())) {
-				if (Herobrine.getPluginCore().getSupport().checkBuild(
+				if (HerobrineOld.getPluginCore().getSupport().checkBuild(
 						loc.getWorld().getBlockAt(loc.getBlockX(), loc.getBlockY() - 1, loc.getBlockZ()).getLocation())
-						&& Herobrine.getPluginCore().getSupport().checkBuild(loc.getWorld()
+						&& HerobrineOld.getPluginCore().getSupport().checkBuild(loc.getWorld()
 								.getBlockAt(loc.getBlockX(), loc.getBlockY() - 2, loc.getBlockZ()).getLocation())
-						&& Herobrine.getPluginCore().getSupport().checkBuild(loc.getWorld()
+						&& HerobrineOld.getPluginCore().getSupport().checkBuild(loc.getWorld()
 								.getBlockAt(loc.getBlockX(), loc.getBlockY() - 1, loc.getBlockZ() - 1).getLocation())
-						&& Herobrine.getPluginCore().getSupport().checkBuild(loc.getWorld()
+						&& HerobrineOld.getPluginCore().getSupport().checkBuild(loc.getWorld()
 								.getBlockAt(loc.getBlockX(), loc.getBlockY() - 2, loc.getBlockZ() - 1).getLocation())
-						&& Herobrine.getPluginCore().getSupport().checkBuild(loc.getWorld()
+						&& HerobrineOld.getPluginCore().getSupport().checkBuild(loc.getWorld()
 								.getBlockAt(loc.getBlockX(), loc.getBlockY() - 3, loc.getBlockZ()).getLocation())
-						&& Herobrine.getPluginCore().getSupport().checkBuild(loc.getWorld()
+						&& HerobrineOld.getPluginCore().getSupport().checkBuild(loc.getWorld()
 								.getBlockAt(loc.getBlockX(), loc.getBlockY() - 3, loc.getBlockZ() - 1).getLocation())
-						&& Herobrine.getPluginCore().getSupport().checkBuild(loc.getWorld()
+						&& HerobrineOld.getPluginCore().getSupport().checkBuild(loc.getWorld()
 								.getBlockAt(loc.getBlockX(), loc.getBlockY() - 1, loc.getBlockZ() - 1).getLocation())
-						&& Herobrine.getPluginCore().getSupport().checkBuild(loc.getWorld()
+						&& HerobrineOld.getPluginCore().getSupport().checkBuild(loc.getWorld()
 								.getBlockAt(loc.getBlockX(), loc.getBlockY() - 2, loc.getBlockZ() - 1).getLocation())
-						&& Herobrine.getPluginCore().getSupport().checkBuild(loc.getWorld()
+						&& HerobrineOld.getPluginCore().getSupport().checkBuild(loc.getWorld()
 								.getBlockAt(loc.getBlockX(), loc.getBlockY() - 1, loc.getBlockZ() - 2).getLocation())) {
 					Bury(loc.getWorld(), loc.getBlockX(), loc.getBlockY(), loc.getBlockZ(), player);
 					return new CoreResult(true, player.getDisplayName() + " was buried by Herobrine.");

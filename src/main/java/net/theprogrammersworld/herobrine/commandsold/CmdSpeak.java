@@ -6,11 +6,11 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import net.md_5.bungee.api.ChatColor;
-import net.theprogrammersworld.herobrine.Herobrine;
+import net.theprogrammersworld.herobrine.HerobrineOld;
 
 public class CmdSpeak extends SubCommand {
 
-	public CmdSpeak(Herobrine plugin, Logger log) {
+	public CmdSpeak(HerobrineOld plugin, Logger log) {
 		super(plugin, log);
 	}
 

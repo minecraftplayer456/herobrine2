@@ -5,11 +5,11 @@ import java.util.logging.Logger;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-import net.theprogrammersworld.herobrine.Herobrine;
+import net.theprogrammersworld.herobrine.HerobrineOld;
 
 public class CmdReload extends SubCommand {
 
-	public CmdReload(Herobrine plugin, Logger log) {
+	public CmdReload(HerobrineOld plugin, Logger log) {
 		super(plugin, log);
 	}
 

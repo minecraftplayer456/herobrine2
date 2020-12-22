@@ -14,7 +14,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.util.Vector;
 
-import net.theprogrammersworld.herobrine.Herobrine;
+import net.theprogrammersworld.herobrine.HerobrineOld;
 import net.theprogrammersworld.herobrine.AIold.*;
 import net.theprogrammersworld.herobrine.AIold.Core.CoreType;
 import net.theprogrammersworld.herobrine.AIold.cores.Heads;
@@ -65,15 +65,15 @@ public class BlockListener implements Listener {
 						}
 					}
 
-					if (checkListCorrect && Herobrine.getPluginCore().getConfigDB().UseTotem && !AICore.isTotemCalled) {
-						Herobrine.getPluginCore().getAICore().PlayerCallTotem(event.getPlayer());
+					if (checkListCorrect && HerobrineOld.getPluginCore().getConfigDB().UseTotem && !AICore.isTotemCalled) {
+						HerobrineOld.getPluginCore().getAICore().PlayerCallTotem(event.getPlayer());
 					}
 
 				}
 			}
 		}
 
-		if (event.getBlock().getWorld() == Bukkit.getServer().getWorld(Herobrine.getPluginCore().getConfigDB().HerobrineWorldName)) {
+		if (event.getBlock().getWorld() == Bukkit.getServer().getWorld(HerobrineOld.getPluginCore().getConfigDB().HerobrineWorldName)) {
 			event.setCancelled(true);
 			return;
 		}
@@ -82,11 +82,11 @@ public class BlockListener implements Listener {
 
 	@EventHandler
 	public void onBlockBreak(BlockBreakEvent event) {
-		if (event.getBlock().getWorld() == Bukkit.getServer().getWorld(Herobrine.getPluginCore().getConfigDB().HerobrineWorldName)) {
+		if (event.getBlock().getWorld() == Bukkit.getServer().getWorld(HerobrineOld.getPluginCore().getConfigDB().HerobrineWorldName)) {
 			event.setCancelled(true);
 			return;
 		} else {
-			Heads h = (Heads) Herobrine.getPluginCore().getAICore().getCore(CoreType.HEADS);
+			Heads h = (Heads) HerobrineOld.getPluginCore().getAICore().getCore(CoreType.HEADS);
 			ArrayList<Block> list = h.getHeadList();
 			if (list.contains(event.getBlock())) {
 				event.setCancelled(true);
@@ -98,7 +98,7 @@ public class BlockListener implements Listener {
 
 	@EventHandler
 	public void onBlockPlace(BlockPlaceEvent event) {
-		if (event.getBlock().getWorld() == Bukkit.getServer().getWorld(Herobrine.getPluginCore().getConfigDB().HerobrineWorldName)) {
+		if (event.getBlock().getWorld() == Bukkit.getServer().getWorld(HerobrineOld.getPluginCore().getConfigDB().HerobrineWorldName)) {
 			event.setCancelled(true);
 			return;
 		}

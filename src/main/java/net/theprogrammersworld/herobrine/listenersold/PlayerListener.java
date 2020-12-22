@@ -4,7 +4,7 @@ import net.minecraft.server.v1_16_R3.PacketPlayOutPlayerInfo;
 import net.minecraft.server.v1_16_R3.PacketPlayOutPlayerInfo.EnumPlayerInfoAction;
 import net.theprogrammersworld.herobrine.AIold.AICore;
 import net.theprogrammersworld.herobrine.AIold.Core.CoreType;
-import net.theprogrammersworld.herobrine.Herobrine;
+import net.theprogrammersworld.herobrine.HerobrineOld;
 import net.theprogrammersworld.herobrine.Utils;
 import net.theprogrammersworld.herobrine.miscold.ItemName;
 import org.bukkit.*;
@@ -35,9 +35,9 @@ public class PlayerListener implements Listener {
 	private Location p_loc = null;
 	private long timestamp = 0;
 	private boolean canUse = false;
-	private Herobrine PluginCore = null;
+	private HerobrineOld PluginCore = null;
 
-	public PlayerListener(Herobrine plugin) {
+	public PlayerListener(HerobrineOld plugin) {
 		equalsLoreS.add("Herobrine artifact");
 		equalsLoreS.add("Sword of Lightning");
 		equalsLoreA.add("Herobrine artifact");
@@ -48,9 +48,9 @@ public class PlayerListener implements Listener {
 	@EventHandler
 	public void onJoin(PlayerJoinEvent event) {
 		// If the persistent tab list entry for Herobrine is enabled, send an "add player" packet to the user on login.
-		if(Herobrine.getPluginCore().getConfigDB().ShowInTabList)
+		if(HerobrineOld.getPluginCore().getConfigDB().ShowInTabList)
 			((CraftPlayer) event.getPlayer()).getHandle().playerConnection.sendPacket(
-					new PacketPlayOutPlayerInfo(EnumPlayerInfoAction.ADD_PLAYER, Herobrine.getPluginCore().HerobrineNPC.getEntity()));
+					new PacketPlayOutPlayerInfo(EnumPlayerInfoAction.ADD_PLAYER, HerobrineOld.getPluginCore().HerobrineNPC.getEntity()));
 		
 		// Check if the user has a Graveyard cache. If they do, this means they are stuck in the Graveyard and
 		// need teleported out.
@@ -79,7 +79,7 @@ public class PlayerListener implements Listener {
 		}, 20L); // 20L = 1 sec
 		
 		// If a newer version of Herobrine is available and the player is an OP, display a message to the OP stating that a new version is available.
-		if(Herobrine.getPluginCore().getConfigDB().newVersionFound && event.getPlayer().isOp())
+		if(HerobrineOld.getPluginCore().getConfigDB().newVersionFound && event.getPlayer().isOp())
 			event.getPlayer().sendMessage(ChatColor.RED + "A new version of Herobrine is available. To "
 					+ "get it, go to www.theprogrammersworld.net/Herobrine and click \"Download\".");
 	}
@@ -219,7 +219,7 @@ public class PlayerListener implements Listener {
 			if (AICore.PlayerTarget == event.getPlayer()
 					&& PluginCore.getAICore().getCoreTypeNow() == CoreType.GRAVEYARD
 					&& event.getPlayer().getLocation().getWorld() == Bukkit.getServer()
-							.getWorld(Herobrine.getPluginCore().getConfigDB().HerobrineWorldName)
+							.getWorld(HerobrineOld.getPluginCore().getConfigDB().HerobrineWorldName)
 					&& AICore.isTarget) {
 
 				if (Utils.getRandomGen().nextBoolean()) {
@@ -283,14 +283,14 @@ public class PlayerListener implements Listener {
 	@EventHandler
 	public void onPlayerMoveEvent(PlayerMoveEvent event) {
 		// Dynamically toggle Herobrine's visibility to players as a workaround to the persistent tab list entry if the persistent entry is disabled.
-		if(!Herobrine.getPluginCore().getConfigDB().ShowInTabList)
+		if(!HerobrineOld.getPluginCore().getConfigDB().ShowInTabList)
 			PluginCore.getAICore().toggleHerobrinePlayerVisibility(event.getPlayer());
 		
 		// Prevent player from moving when in Herobrine's Graveyard.
 		if (event.getPlayer().getEntityId() != PluginCore.HerobrineEntityID) {
-			if (event.getPlayer().getWorld() == Bukkit.getServer().getWorld(Herobrine.getPluginCore().getConfigDB().HerobrineWorldName)) {
+			if (event.getPlayer().getWorld() == Bukkit.getServer().getWorld(HerobrineOld.getPluginCore().getConfigDB().HerobrineWorldName)) {
 				Player player = (Player) event.getPlayer();
-				player.teleport(new Location(Bukkit.getServer().getWorld(Herobrine.getPluginCore().getConfigDB().HerobrineWorldName), -2.49f, 4.f,
+				player.teleport(new Location(Bukkit.getServer().getWorld(HerobrineOld.getPluginCore().getConfigDB().HerobrineWorldName), -2.49f, 4.f,
 						10.69f, -179.85f, 0.44999f));
 			}
 		}

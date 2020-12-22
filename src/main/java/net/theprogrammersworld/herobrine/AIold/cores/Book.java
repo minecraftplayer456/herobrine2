@@ -8,7 +8,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
 
-import net.theprogrammersworld.herobrine.Herobrine;
+import net.theprogrammersworld.herobrine.HerobrineOld;
 import net.theprogrammersworld.herobrine.Utils;
 import net.theprogrammersworld.herobrine.AIold.Core;
 import net.theprogrammersworld.herobrine.AIold.CoreResult;
@@ -16,22 +16,22 @@ import net.theprogrammersworld.herobrine.AIold.CoreResult;
 public class Book extends Core {
 
 	public Book() {
-		super(CoreType.BOOK, AppearType.NORMAL, Herobrine.getPluginCore());
+		super(CoreType.BOOK, AppearType.NORMAL, HerobrineOld.getPluginCore());
 	}
 
 	public CoreResult CallCore(Object[] data) {
 		Player player = (Player) data[0];
 
-		if (Herobrine.getPluginCore().getConfigDB().useWorlds.contains(player.getLocation().getWorld().getName())) {
+		if (HerobrineOld.getPluginCore().getConfigDB().useWorlds.contains(player.getLocation().getWorld().getName())) {
 			
-			if (Herobrine.getPluginCore().getConfigDB().WriteBooks == true
-				&& Herobrine.getPluginCore().getSupport().checkBooks(player.getLocation())) {
+			if (HerobrineOld.getPluginCore().getConfigDB().WriteBooks == true
+				&& HerobrineOld.getPluginCore().getSupport().checkBooks(player.getLocation())) {
 				
 				int chance = Utils.getRandomGen().nextInt(100);
-				if (chance > (100 - Herobrine.getPluginCore().getConfigDB().BookChance)) {
+				if (chance > (100 - HerobrineOld.getPluginCore().getConfigDB().BookChance)) {
 					Inventory chest = (Inventory) data[1];
 					if (chest.firstEmpty() != -1) {
-						if (Herobrine.getPluginCore().getAICore().getResetLimits().isBook()) {
+						if (HerobrineOld.getPluginCore().getAICore().getResetLimits().isBook()) {
 							chest.setItem(chest.firstEmpty(), newBook());
 							return new CoreResult(true, "Herobrine's book created.");
 						}
@@ -50,7 +50,7 @@ public class Book extends Core {
 
 	public ItemStack newBook() {
 
-		int count = Herobrine.getPluginCore().getConfigDB().useBookMessages.size();
+		int count = HerobrineOld.getPluginCore().getConfigDB().useBookMessages.size();
 
 		int chance = Utils.getRandomGen().nextInt(count);
 
@@ -62,7 +62,7 @@ public class Book extends Core {
 		meta.setTitle("");
 		meta.setAuthor("");
 
-		list.add(0, (String) Herobrine.getPluginCore().getConfigDB().useBookMessages.get(chance));
+		list.add(0, (String) HerobrineOld.getPluginCore().getConfigDB().useBookMessages.get(chance));
 
 		meta.setPages(list);
 

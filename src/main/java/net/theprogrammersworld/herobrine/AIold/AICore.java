@@ -16,7 +16,7 @@ import org.bukkit.inventory.ItemStack;
 import net.minecraft.server.v1_16_R3.EntityPlayer;
 import net.minecraft.server.v1_16_R3.PacketPlayOutPlayerInfo;
 import net.minecraft.server.v1_16_R3.PacketPlayOutPlayerInfo.EnumPlayerInfoAction;
-import net.theprogrammersworld.herobrine.Herobrine;
+import net.theprogrammersworld.herobrine.HerobrineOld;
 import net.theprogrammersworld.herobrine.Utils;
 import net.theprogrammersworld.herobrine.AIold.Core.CoreType;
 import net.theprogrammersworld.herobrine.AIold.cores.Attack;
@@ -46,7 +46,7 @@ public class AICore {
 
 	private ArrayList<Core> AllCores = new ArrayList<Core>();
 	private CoreType CoreNow = CoreType.ANY;
-	public static Herobrine plugin;
+	public static HerobrineOld plugin;
 	public static Player PlayerTarget;
 	public static boolean isTarget = false;
 	public static int ticksToEnd = 0;
@@ -103,7 +103,7 @@ public class AICore {
 
 		resetLimits = new ResetLimits();
 
-		plugin = Herobrine.getPluginCore();
+		plugin = HerobrineOld.getPluginCore();
 		log.info("[Herobrine] Herobrine is now running in debug mode.");
 		FindPlayer();
 		StartIntervals();
@@ -140,7 +140,7 @@ public class AICore {
 
 		String result = "";
 
-		if (Herobrine.getPluginCore().getAICore().getCoreTypeNow() == CoreType.RANDOM_POSITION) {
+		if (HerobrineOld.getPluginCore().getAICore().getCoreTypeNow() == CoreType.RANDOM_POSITION) {
 			result = "Yes";
 		} else {
 			result = "No";
@@ -156,32 +156,32 @@ public class AICore {
 			GraveyardTeleport(player);
 		} else if (chance < 50) {
 			setHauntTarget(player);
-		} else if (Herobrine.getPluginCore().getConfigDB().SpawnDemonsOnPlayerBedEnter && Herobrine.getPluginCore().getConfigDB().UseNPC_Demon
-				&& !Herobrine.isNPCDisabled) {
-			Herobrine.getPluginCore().getEntityManager().spawnCustomSkeleton(player.getLocation(), MobType.DEMON);
+		} else if (HerobrineOld.getPluginCore().getConfigDB().SpawnDemonsOnPlayerBedEnter && HerobrineOld.getPluginCore().getConfigDB().UseNPC_Demon
+				&& !HerobrineOld.isNPCDisabled) {
+			HerobrineOld.getPluginCore().getEntityManager().spawnCustomSkeleton(player.getLocation(), MobType.DEMON);
 		}
 	}
 
 	public void FindPlayer() {
-		if (Herobrine.getPluginCore().getConfigDB().OnlyWalkingMode == false) {
+		if (HerobrineOld.getPluginCore().getConfigDB().OnlyWalkingMode == false) {
 
 			if (isTarget == false) {
 
 				int att_chance = Utils.getRandomGen().nextInt(100);
 				log.info("[Herobrine] Generating find chance...");
 
-				if (att_chance - (Herobrine.getPluginCore().getConfigDB().ShowRate * 4) < 55) {
+				if (att_chance - (HerobrineOld.getPluginCore().getConfigDB().ShowRate * 4) < 55) {
 
 					if (Bukkit.getServer().getOnlinePlayers().size() > 0) {
 
 						log.info("[Herobrine] Finding target...");
 						Player targetPlayer = Utils.getRandomPlayer();
 
-						if (targetPlayer.getEntityId() != Herobrine.getPluginCore().HerobrineEntityID) {
+						if (targetPlayer.getEntityId() != HerobrineOld.getPluginCore().HerobrineEntityID) {
 
-							if (Herobrine.getPluginCore().getConfigDB().useWorlds
+							if (HerobrineOld.getPluginCore().getConfigDB().useWorlds
 									.contains(targetPlayer.getLocation().getWorld().getName())
-									&& Herobrine.getPluginCore().canAttackPlayerNoMSG(targetPlayer)) {
+									&& HerobrineOld.getPluginCore().canAttackPlayerNoMSG(targetPlayer)) {
 
 								CancelTarget(CoreType.ANY);
 								isTarget = true;
@@ -217,9 +217,9 @@ public class AICore {
 				nowloc.setYaw(1.f);
 				nowloc.setPitch(1.f);
 				
-				Herobrine.getPluginCore().HerobrineNPC.moveTo(nowloc);
+				HerobrineOld.getPluginCore().HerobrineNPC.moveTo(nowloc);
 				CoreNow = CoreType.ANY;
-				Herobrine.getPluginCore().getPathManager().setPath(null);
+				HerobrineOld.getPluginCore().getPathManager().setPath(null);
 			}
 
 			if (isTarget == true) {
@@ -232,7 +232,7 @@ public class AICore {
 
 				_ticks = 0;
 				isTarget = false;
-				Herobrine.HerobrineHP = Herobrine.HerobrineMaxHP;
+				HerobrineOld.HerobrineHP = HerobrineOld.HerobrineMaxHP;
 				
 				log.info("[Herobrine] Cancelled target.");
 				Location nowloc = new Location((World) Bukkit.getServer().getWorlds().get(0), 0, -20.f, 0);
@@ -240,13 +240,13 @@ public class AICore {
 				nowloc.setYaw(1.f);
 				nowloc.setPitch(1.f);
 				
-				Herobrine.getPluginCore().HerobrineNPC.moveTo(nowloc);
+				HerobrineOld.getPluginCore().HerobrineNPC.moveTo(nowloc);
 				CoreNow = CoreType.ANY;
 				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(AICore.plugin, new Runnable() {
 					public void run() {
 						FindPlayer();
 					}
-				}, (6 / Herobrine.getPluginCore().getConfigDB().ShowRate) * (Herobrine.getPluginCore().getConfigDB().ShowInterval * 1L));
+				}, (6 / HerobrineOld.getPluginCore().getConfigDB().ShowRate) * (HerobrineOld.getPluginCore().getConfigDB().ShowInterval * 1L));
 
 			}
 		}
@@ -258,7 +258,7 @@ public class AICore {
 				Object[] data = { PlayerTarget };
 				int chance = Utils.getRandomGen().nextInt(100);
 				if (chance <= 10) {
-					if (Herobrine.getPluginCore().getConfigDB().UseGraveyardWorld == true) {
+					if (HerobrineOld.getPluginCore().getConfigDB().UseGraveyardWorld == true) {
 						log.info("[Herobrine] Teleporting " + PlayerTarget.getDisplayName() + " to Herobrine's Graveyard.");
 
 						getCore(CoreType.GRAVEYARD).RunCore(data);
@@ -321,10 +321,10 @@ public class AICore {
 	private void RandomPositionInterval() {
 		if (CoreNow == CoreType.ANY) {
 			((RandomPosition) getCore(CoreType.RANDOM_POSITION)).setRandomTicks(0);
-			int count = Herobrine.getPluginCore().getConfigDB().useWorlds.size();
+			int count = HerobrineOld.getPluginCore().getConfigDB().useWorlds.size();
 			int chance = Utils.getRandomGen().nextInt(count);
 			Object[] data = {
-					Bukkit.getServer().getWorld(Herobrine.getPluginCore().getConfigDB().useWorlds.get(chance)) };
+					Bukkit.getServer().getWorld(HerobrineOld.getPluginCore().getConfigDB().useWorlds.get(chance)) };
 			getCore(CoreType.RANDOM_POSITION).RunCore(data);
 
 		}
@@ -356,21 +356,21 @@ public class AICore {
 				log.info("[Herobrine] Finding pyramid target...");
 				
 				Player player = Utils.getRandomPlayer();
-				if (Herobrine.getPluginCore().getConfigDB().useWorlds.contains(player.getLocation().getWorld().getName())) {
+				if (HerobrineOld.getPluginCore().getConfigDB().useWorlds.contains(player.getLocation().getWorld().getName())) {
 
 					int chance2 = Utils.getRandomGen().nextInt(100);
 					if (chance2 < 30) {
-						if (Herobrine.getPluginCore().getConfigDB().BuildPyramids == true) {
+						if (HerobrineOld.getPluginCore().getConfigDB().BuildPyramids == true) {
 							Object[] data = { player };
 							getCore(CoreType.PYRAMID).RunCore(data);
 						}
 					} else if (chance2 < 70) {
-						if (Herobrine.getPluginCore().getConfigDB().BuryPlayers) {
+						if (HerobrineOld.getPluginCore().getConfigDB().BuryPlayers) {
 							Object[] data = { player };
 							getCore(CoreType.BURY_PLAYER).RunCore(data);
 						}
 					} else {
-						if (Herobrine.getPluginCore().getConfigDB().UseHeads) {
+						if (HerobrineOld.getPluginCore().getConfigDB().UseHeads) {
 							Object[] data = { player.getName() };
 							getCore(CoreType.HEADS).RunCore(data);
 						}
@@ -383,14 +383,14 @@ public class AICore {
 	}
 
 	private void TempleInterval() {
-		if (Herobrine.getPluginCore().getConfigDB().BuildTemples == true) {
+		if (HerobrineOld.getPluginCore().getConfigDB().BuildTemples == true) {
 			if (Utils.getRandomGen().nextBoolean()) {
 				if (Bukkit.getServer().getOnlinePlayers().size() > 0) {
 					log.info("[Herobrine] Finding temple target...");
 					
 					Player player = Utils.getRandomPlayer();
 					
-					if (Herobrine.getPluginCore().getConfigDB().useWorlds.contains(player.getLocation().getWorld().getName())) {
+					if (HerobrineOld.getPluginCore().getConfigDB().useWorlds.contains(player.getLocation().getWorld().getName())) {
 						if (Utils.getRandomGen().nextBoolean()) {
 							Object[] data = { player };
 							getCore(CoreType.TEMPLE).RunCore(data);
@@ -404,13 +404,13 @@ public class AICore {
 	}
 
 	private void BuildCave() {
-		if (Herobrine.getPluginCore().getConfigDB().BuildStuff == true) {
+		if (HerobrineOld.getPluginCore().getConfigDB().BuildStuff == true) {
 			if (Utils.getRandomGen().nextBoolean()) {
 				if (Bukkit.getServer().getOnlinePlayers().size() > 0) {
 					
 					Player player = Utils.getRandomPlayer();
 					
-					if (Herobrine.getPluginCore().getConfigDB().useWorlds
+					if (HerobrineOld.getPluginCore().getConfigDB().useWorlds
 							.contains(player.getLocation().getWorld().getName())) {
 
 						if (Utils.getRandomGen().nextBoolean()) {
@@ -439,20 +439,20 @@ public class AICore {
 
 				Player player = Utils.getRandomPlayer();
 
-				if (player.getEntityId() != Herobrine.getPluginCore().HerobrineEntityID) {
-					if (Herobrine.getPluginCore().getConfigDB().useWorlds
+				if (player.getEntityId() != HerobrineOld.getPluginCore().HerobrineEntityID) {
+					if (HerobrineOld.getPluginCore().getConfigDB().useWorlds
 							.contains(player.getLocation().getWorld().getName())) {
 						Object[] data = { player };
-						if (Herobrine.getPluginCore().canAttackPlayerNoMSG(player)) {
+						if (HerobrineOld.getPluginCore().canAttackPlayerNoMSG(player)) {
 							if (Utils.getRandomGen().nextInt(100) < 30) {
 
 								getCore(CoreType.RANDOM_SOUND).RunCore(data);
 							} else if (Utils.getRandomGen().nextInt(100) < 60) {
-								if (Herobrine.getPluginCore().getConfigDB().Burn) {
+								if (HerobrineOld.getPluginCore().getConfigDB().Burn) {
 									getCore(CoreType.BURN).RunCore(data);
 								}
 							} else if (Utils.getRandomGen().nextInt(100) < 80) {
-								if (Herobrine.getPluginCore().getConfigDB().Curse) {
+								if (HerobrineOld.getPluginCore().getConfigDB().Curse) {
 									getCore(CoreType.CURSE).RunCore(data);
 								}
 							} else {
@@ -472,14 +472,14 @@ public class AICore {
 
 		for(int i=0; i < 5; i++){
 			for(float j=0; j < 2; j+= 0.5f){
-				Location hbloc = (Location) Herobrine.getPluginCore().HerobrineNPC.getBukkitEntity().getLocation();
+				Location hbloc = (Location) HerobrineOld.getPluginCore().HerobrineNPC.getBukkitEntity().getLocation();
 				hbloc.setY(hbloc.getY() + j);
 				hbloc.getWorld().playEffect(hbloc, Effect.SMOKE, 80);
 			}
 		}
 		
 		ploc.setY(-20);
-		Herobrine.getPluginCore().HerobrineNPC.moveTo(ploc);
+		HerobrineOld.getPluginCore().HerobrineNPC.moveTo(ploc);
 
 	}
 
@@ -522,8 +522,8 @@ public class AICore {
 			public void run() {
 				BuildInterval();
 			}
-		}, 1 * 1L * Herobrine.getPluginCore().getConfigDB().BuildInterval,
-		   1 * 1L * Herobrine.getPluginCore().getConfigDB().BuildInterval);
+		}, 1 * 1L * HerobrineOld.getPluginCore().getConfigDB().BuildInterval,
+		   1 * 1L * HerobrineOld.getPluginCore().getConfigDB().BuildInterval);
 	}
 
 	public void Start_MAIN() {
@@ -533,10 +533,10 @@ public class AICore {
 				FindPlayer();
 
 			}
-		}, (6 / Herobrine.getPluginCore().getConfigDB().ShowRate)
-				* (Herobrine.getPluginCore().getConfigDB().ShowInterval * 1L),
-				(6 / Herobrine.getPluginCore().getConfigDB().ShowRate)
-						* (Herobrine.getPluginCore().getConfigDB().ShowInterval * 1L));
+		}, (6 / HerobrineOld.getPluginCore().getConfigDB().ShowRate)
+				* (HerobrineOld.getPluginCore().getConfigDB().ShowInterval * 1L),
+				(6 / HerobrineOld.getPluginCore().getConfigDB().ShowRate)
+						* (HerobrineOld.getPluginCore().getConfigDB().ShowInterval * 1L));
 	}
 
 	public void Start_RM() {
@@ -565,8 +565,8 @@ public class AICore {
 			public void run() {
 				RandomCoreINT();
 			}
-		}, (long) (Herobrine.getPluginCore().getConfigDB().ShowInterval / 1.5),
-				(long) (Herobrine.getPluginCore().getConfigDB().ShowInterval / 1.5));
+		}, (long) (HerobrineOld.getPluginCore().getConfigDB().ShowInterval / 1.5),
+				(long) (HerobrineOld.getPluginCore().getConfigDB().ShowInterval / 1.5));
 	}
 
 	public void Start_CG() {
@@ -675,18 +675,18 @@ public class AICore {
 	public boolean toggleHerobrinePlayerVisibilityNoTeleport(Player p) {
 		// Toggles the visibility of Herobrine for the given player. This function does not perform the "visibility activation teleport".
 		// If an activiation teleport should be performed, returns true, otherwise, false.
-		boolean playerCanSeeHerobrine = p.hasLineOfSight(Herobrine.getPluginCore().HerobrineNPC.getBukkitEntity());
+		boolean playerCanSeeHerobrine = p.hasLineOfSight(HerobrineOld.getPluginCore().HerobrineNPC.getBukkitEntity());
 		if(playerCanSeeHerobrine && !visibilityList.contains(p)) {
 			// If player p can see Herobrine but visibilty is not already enabled, then enable it.
 			EntityPlayer pcon = ((CraftPlayer) p).getHandle();
-			pcon.playerConnection.sendPacket(new PacketPlayOutPlayerInfo(EnumPlayerInfoAction.ADD_PLAYER, Herobrine.getPluginCore().HerobrineNPC.getEntity()));
+			pcon.playerConnection.sendPacket(new PacketPlayOutPlayerInfo(EnumPlayerInfoAction.ADD_PLAYER, HerobrineOld.getPluginCore().HerobrineNPC.getEntity()));
 			visibilityList.add(p);
 			return true;
 		}
 		else if(!playerCanSeeHerobrine && visibilityList.contains(p)) {
 			// If player p cannot see Herobrine but visibility is still enabled, then disable it.
 			EntityPlayer pcon = ((CraftPlayer) p).getHandle();
-			pcon.playerConnection.sendPacket(new PacketPlayOutPlayerInfo(EnumPlayerInfoAction.REMOVE_PLAYER, Herobrine.getPluginCore().HerobrineNPC.getEntity()));
+			pcon.playerConnection.sendPacket(new PacketPlayOutPlayerInfo(EnumPlayerInfoAction.REMOVE_PLAYER, HerobrineOld.getPluginCore().HerobrineNPC.getEntity()));
 			visibilityList.remove(p);
 		}
 		return false;
@@ -694,9 +694,9 @@ public class AICore {
 	
 	public void visibilityActivationTeleport() {
 		// Makes Herobrine visible to players that should be able to see him by quickly teleporting him out of the map and back to where he previously was.
-		Location original = Herobrine.getPluginCore().HerobrineNPC.getBukkitEntity().getLocation();
-		Herobrine.getPluginCore().HerobrineNPC.getBukkitEntity().teleport(new Location(Bukkit.getServer().getWorlds().get(0), 0, -20, 0));
-		Herobrine.getPluginCore().HerobrineNPC.getBukkitEntity().teleport(original);
+		Location original = HerobrineOld.getPluginCore().HerobrineNPC.getBukkitEntity().getLocation();
+		HerobrineOld.getPluginCore().HerobrineNPC.getBukkitEntity().teleport(new Location(Bukkit.getServer().getWorlds().get(0), 0, -20, 0));
+		HerobrineOld.getPluginCore().HerobrineNPC.getBukkitEntity().teleport(original);
 	}
 	
 	public void toggleHerobrinePlayerVisibility(Player p) {

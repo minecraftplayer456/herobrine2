@@ -15,7 +15,7 @@ import net.minecraft.server.v1_16_R3.ChatMessageType;
 import net.minecraft.server.v1_16_R3.IChatBaseComponent;
 import net.minecraft.server.v1_16_R3.IChatBaseComponent.ChatSerializer;
 import net.minecraft.server.v1_16_R3.PacketPlayOutChat;
-import net.theprogrammersworld.herobrine.Herobrine;
+import net.theprogrammersworld.herobrine.HerobrineOld;
 
 public class CmdExecutor implements CommandExecutor {
 
@@ -25,8 +25,8 @@ public class CmdExecutor implements CommandExecutor {
 			"reload", "pluginreport", "cancel", "allworlds", "position", "attack", "haunt", "heads",
 			"bury", "curse", "burn", "pyramid", "cave", "temple", "graveyard", "speakrandom", "speak" };
 
-	public CmdExecutor(Herobrine p) {
-		log = Herobrine.log;
+	public CmdExecutor(HerobrineOld p) {
+		log = HerobrineOld.log;
 
 		subCommands.put("reload", new CmdReload(p, log));
 		subCommands.put("cancel", new CmdCancel(p, log));

@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import net.theprogrammersworld.herobrine.Herobrine;
+import net.theprogrammersworld.herobrine.HerobrineOld;
 import net.theprogrammersworld.herobrine.Utils;
 import net.theprogrammersworld.herobrine.AIold.AICore;
 import net.theprogrammersworld.herobrine.AIold.Core;
@@ -24,7 +24,7 @@ public class Attack extends Core {
 	private boolean isHandler = false;
 
 	public Attack() {
-		super(CoreType.ATTACK, AppearType.APPEAR, Herobrine.getPluginCore());
+		super(CoreType.ATTACK, AppearType.APPEAR, HerobrineOld.getPluginCore());
 	}
 
 	public CoreResult CallCore(Object[] data) {
@@ -38,7 +38,7 @@ public class Attack extends Core {
 					return new CoreResult(false, player.getDisplayName() + " cannot be attacked because they are protected.");
 				}
 
-				Herobrine.HerobrineHP = Herobrine.HerobrineMaxHP;
+				HerobrineOld.HerobrineHP = HerobrineOld.HerobrineMaxHP;
 				ticksToEnd = 0;
 				AICore.PlayerTarget = player;
 				AICore.isTarget = true;

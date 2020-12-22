@@ -6,7 +6,7 @@ import net.minecraft.server.v1_16_R3.EnumHand;
 import net.minecraft.server.v1_16_R3.PacketPlayInArmAnimation;
 import net.minecraft.server.v1_16_R3.PlayerChunkMap;
 import net.minecraft.server.v1_16_R3.WorldServer;
-import net.theprogrammersworld.herobrine.Herobrine;
+import net.theprogrammersworld.herobrine.HerobrineOld;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -74,12 +74,12 @@ public class HumanNPC {
 		getEntity().getBukkitEntity().teleport(loc);
 		
 		// After Herobrine moves, check if any players are in Herobrine's line of sight if the persistent tab list entry is disabled.
-		if(!Herobrine.getPluginCore().getConfigDB().ShowInTabList) {
+		if(!HerobrineOld.getPluginCore().getConfigDB().ShowInTabList) {
 			boolean doActivationTeleport = false;
 			for(Player p : Bukkit.getOnlinePlayers())
-				doActivationTeleport = doActivationTeleport || Herobrine.getPluginCore().getAICore().toggleHerobrinePlayerVisibilityNoTeleport(p);
+				doActivationTeleport = doActivationTeleport || HerobrineOld.getPluginCore().getAICore().toggleHerobrinePlayerVisibilityNoTeleport(p);
 			if(doActivationTeleport)
-				Herobrine.getPluginCore().getAICore().visibilityActivationTeleport();
+				HerobrineOld.getPluginCore().getAICore().visibilityActivationTeleport();
 		}
 	}
 

@@ -17,14 +17,14 @@ public class Utils {
 	public static Player getRandomPlayer() {
 		Collection<? extends Player> playersOnline = Bukkit.getServer().getOnlinePlayers();
 
-		if(playersOnline.size() == 1 && ((Player)playersOnline.toArray()[0]).getEntityId() == Herobrine.getPluginCore().HerobrineEntityID)
+		if(playersOnline.size() == 1 && ((Player)playersOnline.toArray()[0]).getEntityId() == HerobrineOld.getPluginCore().HerobrineEntityID)
 			return null;
 		
 		int player_rolled = new Random().nextInt(playersOnline.size());
 
 		Player p = (Player) playersOnline.toArray()[player_rolled];
 		
-		if (p.getEntityId() == Herobrine.getPluginCore().HerobrineEntityID)
+		if (p.getEntityId() == HerobrineOld.getPluginCore().HerobrineEntityID)
 			return getRandomPlayer();
 		
 		return p;

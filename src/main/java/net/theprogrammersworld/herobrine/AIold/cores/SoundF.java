@@ -3,7 +3,7 @@ package net.theprogrammersworld.herobrine.AIold.cores;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
-import net.theprogrammersworld.herobrine.Herobrine;
+import net.theprogrammersworld.herobrine.HerobrineOld;
 import net.theprogrammersworld.herobrine.Utils;
 import net.theprogrammersworld.herobrine.AIold.Core;
 import net.theprogrammersworld.herobrine.AIold.CoreResult;
@@ -11,7 +11,7 @@ import net.theprogrammersworld.herobrine.AIold.CoreResult;
 public class SoundF extends Core{
 
 	public SoundF(){
-		super(CoreType.SOUNDF,AppearType.NORMAL, Herobrine.getPluginCore());
+		super(CoreType.SOUNDF,AppearType.NORMAL, HerobrineOld.getPluginCore());
 	}
 	
 	public CoreResult CallCore(Object[] data){

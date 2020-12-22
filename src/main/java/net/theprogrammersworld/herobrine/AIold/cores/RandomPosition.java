@@ -9,7 +9,7 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 
 import net.theprogrammersworld.herobrine.ConfigDB;
-import net.theprogrammersworld.herobrine.Herobrine;
+import net.theprogrammersworld.herobrine.HerobrineOld;
 import net.theprogrammersworld.herobrine.Utils;
 import net.theprogrammersworld.herobrine.AIold.AICore;
 import net.theprogrammersworld.herobrine.AIold.Core;
@@ -23,7 +23,7 @@ public class RandomPosition extends Core {
 	private boolean RandomMoveIsPlayer = false;
 
 	public RandomPosition() {
-		super(CoreType.RANDOM_POSITION, AppearType.APPEAR, Herobrine.getPluginCore());
+		super(CoreType.RANDOM_POSITION, AppearType.APPEAR, HerobrineOld.getPluginCore());
 	}
 
 	public int getRandomTicks() {
@@ -149,7 +149,7 @@ public class RandomPosition extends Core {
 	public void RandomMove() {
 		if (PluginCore.getAICore().getCoreTypeNow() == CoreType.RANDOM_POSITION && AICore.isTarget == false
 				&& RandomMoveIsPlayer == false) {
-			Herobrine.HerobrineHP = Herobrine.HerobrineMaxHP;
+			HerobrineOld.HerobrineHP = HerobrineOld.HerobrineMaxHP;
 
 			if (Utils.getRandomGen().nextInt(5) == 3) {
 				Location loc = PluginCore.HerobrineNPC.getBukkitEntity().getLocation();

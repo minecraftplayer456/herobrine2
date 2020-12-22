@@ -6,11 +6,11 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-import net.theprogrammersworld.herobrine.Herobrine;
+import net.theprogrammersworld.herobrine.HerobrineOld;
 
 public class CmdPosition extends SubCommand {
 
-	public CmdPosition(Herobrine plugin, Logger log) {
+	public CmdPosition(HerobrineOld plugin, Logger log) {
 		super(plugin, log);
 	}
 

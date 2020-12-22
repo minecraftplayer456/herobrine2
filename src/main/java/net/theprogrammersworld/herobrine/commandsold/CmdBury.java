@@ -6,12 +6,12 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-import net.theprogrammersworld.herobrine.Herobrine;
+import net.theprogrammersworld.herobrine.HerobrineOld;
 import net.theprogrammersworld.herobrine.AIold.Core.CoreType;
 
 public class CmdBury extends SubCommand {
 
-	public CmdBury(Herobrine plugin, Logger log) {
+	public CmdBury(HerobrineOld plugin, Logger log) {
 		super(plugin, log);
 	}
 

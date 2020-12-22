@@ -8,7 +8,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.ConsoleCommandSender;
 
-import net.theprogrammersworld.herobrine.Herobrine;
+import net.theprogrammersworld.herobrine.HerobrineOld;
 
 public class UpdateScanner implements Runnable {
 
@@ -20,7 +20,7 @@ public class UpdateScanner implements Runnable {
 		final String pluginVersionCount = "32";
 		ConsoleCommandSender console = Bukkit.getServer().getConsoleSender();
 		
-		while(!Herobrine.getPluginCore().getConfigDB().newVersionFound) {
+		while(!HerobrineOld.getPluginCore().getConfigDB().newVersionFound) {
 			// Check for updates once every 24 hours.
 			try {
 				URL versionCheckURL = new URL("https://www.theprogrammersworld.net/Herobrine/latestVersion.html");
@@ -30,7 +30,7 @@ public class UpdateScanner implements Runnable {
 					// A newer version was found. Change the value of "newVersionFound", and break
 					// from this loop in to a loop that will display a "new version" report in the
 					// console once every hour.
-					Herobrine.getPluginCore().getConfigDB().newVersionFound = true;
+					HerobrineOld.getPluginCore().getConfigDB().newVersionFound = true;
 					break;
 				}
 			} catch (Exception e) {

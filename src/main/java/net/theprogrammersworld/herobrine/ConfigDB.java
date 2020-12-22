@@ -363,28 +363,28 @@ public class ConfigDB {
 		ShowInTabList = config.getBoolean("config.ShowInTabList");
 		CheckForUpdates = this.config.getBoolean("config.CheckForUpdates");
 		
-		Herobrine.HerobrineMaxHP = HerobrineHP;
-		Herobrine.getPluginCore().getAICore().Stop_MAIN();
-		Herobrine.getPluginCore().getAICore().Start_MAIN();
-		Herobrine.getPluginCore().getAICore().Stop_BD();
-		Herobrine.getPluginCore().getAICore().Start_BD();
-		Herobrine.getPluginCore().getAICore().Stop_RC();
-		Herobrine.getPluginCore().getAICore().Start_RC();
-		Herobrine.AvailableWorld = false;
-		Herobrine.getPluginCore().getAICore().getResetLimits().updateFromConfig();
+		HerobrineOld.HerobrineMaxHP = HerobrineHP;
+		HerobrineOld.getPluginCore().getAICore().Stop_MAIN();
+		HerobrineOld.getPluginCore().getAICore().Start_MAIN();
+		HerobrineOld.getPluginCore().getAICore().Stop_BD();
+		HerobrineOld.getPluginCore().getAICore().Start_BD();
+		HerobrineOld.getPluginCore().getAICore().Stop_RC();
+		HerobrineOld.getPluginCore().getAICore().Start_RC();
+		HerobrineOld.AvailableWorld = false;
+		HerobrineOld.getPluginCore().getAICore().getResetLimits().updateFromConfig();
 
-		if (Herobrine.getPluginCore().HerobrineNPC != null)
-			Herobrine.getPluginCore().HerobrineNPC.setItemInHand(ItemInHand.getItemStack());
+		if (HerobrineOld.getPluginCore().HerobrineNPC != null)
+			HerobrineOld.getPluginCore().HerobrineNPC.setItemInHand(ItemInHand.getItemStack());
 
 		if (isStartupDone) {
 
-			Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Herobrine.getPluginCore(), new Runnable() {
+			Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(HerobrineOld.getPluginCore(), new Runnable() {
 				public void run() {
 					for (int i = 0; i <= useWorlds.size() - 1; i++)
 						if (Bukkit.getServer().getWorlds().contains(Bukkit.getServer().getWorld(useWorlds.get(i))))
-							Herobrine.AvailableWorld = true;
+							HerobrineOld.AvailableWorld = true;
 
-					if (Herobrine.AvailableWorld == false)
+					if (HerobrineOld.AvailableWorld == false)
 						log.warning("[Herobrine] There are no worlds available for Herobrine to spawn in.");
 				}
 			}, 1L);

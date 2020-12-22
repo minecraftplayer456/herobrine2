@@ -5,12 +5,12 @@ import java.util.logging.Logger;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-import net.theprogrammersworld.herobrine.Herobrine;
+import net.theprogrammersworld.herobrine.HerobrineOld;
 import net.theprogrammersworld.herobrine.AIold.Core.CoreType;
 
 public class CmdCancel extends SubCommand {
 
-	public CmdCancel(Herobrine plugin, Logger log) {
+	public CmdCancel(HerobrineOld plugin, Logger log) {
 		super(plugin, log);
 	}
 

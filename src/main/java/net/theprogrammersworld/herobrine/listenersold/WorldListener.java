@@ -7,7 +7,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.world.ChunkLoadEvent;
 
-import net.theprogrammersworld.herobrine.Herobrine;
+import net.theprogrammersworld.herobrine.HerobrineOld;
 import net.theprogrammersworld.herobrine.AIold.Core.CoreType;
 
 public class WorldListener implements Listener{
@@ -18,21 +18,21 @@ public class WorldListener implements Listener{
 
 			World world = event.getWorld();
 			
-			if (Herobrine.getPluginCore().getConfigDB().useWorlds.contains(world.getName())){
+			if (HerobrineOld.getPluginCore().getConfigDB().useWorlds.contains(world.getName())){
 
-			 if (Herobrine.getPluginCore().getConfigDB().BuildTemples==true){
-				 int templeChance = Herobrine.getPluginCore().getConfigDB().BuildTempleOnChunkPercentage;
+			 if (HerobrineOld.getPluginCore().getConfigDB().BuildTemples==true){
+				 int templeChance = HerobrineOld.getPluginCore().getConfigDB().BuildTempleOnChunkPercentage;
 				 if (new Random().nextInt(100) + 1 <= templeChance){
 					 Object[] data = {event.getChunk()};
-					 Herobrine.getPluginCore().getAICore().getCore(CoreType.TEMPLE).RunCore(data);
+					 HerobrineOld.getPluginCore().getAICore().getCore(CoreType.TEMPLE).RunCore(data);
 				 }
 			 }
 			 
-			 if (Herobrine.getPluginCore().getConfigDB().BuildPyramids==true){
-				 int pyramidChance = Herobrine.getPluginCore().getConfigDB().BuildPyramidOnChunkPercentage;
+			 if (HerobrineOld.getPluginCore().getConfigDB().BuildPyramids==true){
+				 int pyramidChance = HerobrineOld.getPluginCore().getConfigDB().BuildPyramidOnChunkPercentage;
 				 if (new Random().nextInt(100) + 1 <= pyramidChance){
 					 Object[] data = {event.getChunk()};
-				     Herobrine.getPluginCore().getAICore().getCore(CoreType.PYRAMID).RunCore(data);
+				     HerobrineOld.getPluginCore().getAICore().getCore(CoreType.PYRAMID).RunCore(data);
 				 }
 			 }
 		}

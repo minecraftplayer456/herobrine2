@@ -3,7 +3,7 @@ package net.theprogrammersworld.herobrine.AIold.cores;
 import net.theprogrammersworld.herobrine.AIold.AICore;
 import net.theprogrammersworld.herobrine.AIold.Core;
 import net.theprogrammersworld.herobrine.AIold.CoreResult;
-import net.theprogrammersworld.herobrine.Herobrine;
+import net.theprogrammersworld.herobrine.HerobrineOld;
 import net.theprogrammersworld.herobrine.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -26,7 +26,7 @@ public class Haunt extends Core {
 	private boolean isFirst = true;
 
 	public Haunt() {
-		super(CoreType.HAUNT, AppearType.APPEAR, Herobrine.getPluginCore());
+		super(CoreType.HAUNT, AppearType.APPEAR, HerobrineOld.getPluginCore());
 	}
 
 	public CoreResult CallCore(Object[] data) {
@@ -182,7 +182,7 @@ public class Haunt extends Core {
 					
 				}
 
-				Herobrine.HerobrineHP = Herobrine.HerobrineMaxHP;
+				HerobrineOld.HerobrineHP = HerobrineOld.HerobrineMaxHP;
 				loc = AICore.PlayerTarget.getLocation();
 				loc.setY(loc.getY() + 1.5);
 				PluginCore.HerobrineNPC.lookAtPoint(loc);

@@ -2,7 +2,7 @@ package net.theprogrammersworld.herobrine.AIold;
 
 import org.bukkit.Bukkit;
 
-import net.theprogrammersworld.herobrine.Herobrine;
+import net.theprogrammersworld.herobrine.HerobrineOld;
 
 public class ResetLimits {
 
@@ -16,7 +16,7 @@ public class ResetLimits {
 
 	public ResetLimits() {
 
-		taskID = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(Herobrine.getPluginCore(),
+		taskID = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(HerobrineOld.getPluginCore(),
 				new Runnable() {
 					public void run() {
 						resetAll();
@@ -65,9 +65,9 @@ public class ResetLimits {
 	}
 
 	public void updateFromConfig() {
-		maxBooks = Herobrine.getPluginCore().getConfigDB().maxBooks;
-		maxSigns = Herobrine.getPluginCore().getConfigDB().maxSigns;
-		maxHeads = Herobrine.getPluginCore().getConfigDB().maxHeads;
+		maxBooks = HerobrineOld.getPluginCore().getConfigDB().maxBooks;
+		maxSigns = HerobrineOld.getPluginCore().getConfigDB().maxSigns;
+		maxHeads = HerobrineOld.getPluginCore().getConfigDB().maxHeads;
 	}
 
 }

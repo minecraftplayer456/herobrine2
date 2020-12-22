@@ -17,11 +17,11 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import net.md_5.bungee.api.ChatColor;
-import net.theprogrammersworld.herobrine.Herobrine;
+import net.theprogrammersworld.herobrine.HerobrineOld;
 
 public class CmdPluginReport extends SubCommand {
 
-	public CmdPluginReport(Herobrine plugin, Logger log) {
+	public CmdPluginReport(HerobrineOld plugin, Logger log) {
 		super(plugin, log);
 	}
 
@@ -99,7 +99,7 @@ public class CmdPluginReport extends SubCommand {
 			report = "Server IP Address: " + serverIP + "\r\n" +
 					"Submission UUID: " + playerUUID + "\r\n" +
 					"Server Port: " + Bukkit.getServer().getPort() + "\r\n" +
-					"Version: " + Herobrine.getPluginCore().getConfigDB().pluginVersionString + "\r\n\r\n" +
+					"Version: " + HerobrineOld.getPluginCore().getConfigDB().pluginVersionString + "\r\n\r\n" +
 					"Plugin Configuration File:\r\n" + configFileString + " \r\n\r\n";
 			
 			// Assemble the array of words in to a single message.

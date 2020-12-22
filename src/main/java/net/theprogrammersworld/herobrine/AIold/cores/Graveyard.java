@@ -12,7 +12,7 @@ import org.bukkit.World;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
-import net.theprogrammersworld.herobrine.Herobrine;
+import net.theprogrammersworld.herobrine.HerobrineOld;
 import net.theprogrammersworld.herobrine.Utils;
 import net.theprogrammersworld.herobrine.AIold.AICore;
 import net.theprogrammersworld.herobrine.AIold.Core;
@@ -29,7 +29,7 @@ public class Graveyard extends Core {
 	private Player savedPlayer = null;
 
 	public Graveyard() {
-		super(CoreType.GRAVEYARD, AppearType.APPEAR, Herobrine.getPluginCore());
+		super(CoreType.GRAVEYARD, AppearType.APPEAR, HerobrineOld.getPluginCore());
 	}
 
 	public CoreResult CallCore(Object[] data) {
@@ -37,9 +37,9 @@ public class Graveyard extends Core {
 	}
 
 	public CoreResult Teleport(Player player) {
-		if (Herobrine.getPluginCore().getConfigDB().UseGraveyardWorld == true) {
-			if (!Herobrine.getPluginCore().getAICore().checkAncientSword(player.getInventory())) {
-				LivingEntities = Bukkit.getServer().getWorld(Herobrine.getPluginCore().getConfigDB().HerobrineWorldName).getLivingEntities();
+		if (HerobrineOld.getPluginCore().getConfigDB().UseGraveyardWorld == true) {
+			if (!HerobrineOld.getPluginCore().getAICore().checkAncientSword(player.getInventory())) {
+				LivingEntities = Bukkit.getServer().getWorld(HerobrineOld.getPluginCore().getConfigDB().HerobrineWorldName).getLivingEntities();
 				for (int i = 0; i <= LivingEntities.size() - 1; i++) {
 
 					if (LivingEntities.get(i) instanceof Player || LivingEntities.get(i).getEntityId() == PluginCore.HerobrineEntityID) {
@@ -51,7 +51,7 @@ public class Graveyard extends Core {
 
 				}
 
-				Bukkit.getServer().getWorld(Herobrine.getPluginCore().getConfigDB().HerobrineWorldName).setTime(15000);
+				Bukkit.getServer().getWorld(HerobrineOld.getPluginCore().getConfigDB().HerobrineWorldName).setTime(15000);
 				AICore.PlayerTarget = player;
 				Location loc = (Location) player.getLocation();
 				savedX = loc.getX();
@@ -60,7 +60,7 @@ public class Graveyard extends Core {
 				savedWorld = loc.getWorld();
 				savedPlayer = player;
 				cachePreGraveyardPositionToDisk(loc, player);
-				loc.setWorld(Bukkit.getServer().getWorld(Herobrine.getPluginCore().getConfigDB().HerobrineWorldName));
+				loc.setWorld(Bukkit.getServer().getWorld(HerobrineOld.getPluginCore().getConfigDB().HerobrineWorldName));
 				loc.setX(-2.49);
 				loc.setY(4);
 				loc.setZ(10.69);
@@ -71,7 +71,7 @@ public class Graveyard extends Core {
 				Start();
 				
 				AICore.isTarget = true;
-				Bukkit.getServer().getWorld(Herobrine.getPluginCore().getConfigDB().HerobrineWorldName).setStorm(false);
+				Bukkit.getServer().getWorld(HerobrineOld.getPluginCore().getConfigDB().HerobrineWorldName).setStorm(false);
 				
 				return new CoreResult(true, player.getDisplayName() + " was successfully teleported to Herobrine's Graveyard.");
 			} else {
@@ -84,7 +84,7 @@ public class Graveyard extends Core {
 	public void Start() {
 
 		ticks = 0;
-		PluginCore.HerobrineNPC.moveTo(new Location(Bukkit.getServer().getWorld(Herobrine.getPluginCore().getConfigDB().HerobrineWorldName), -2.49, 4, -4.12));
+		PluginCore.HerobrineNPC.moveTo(new Location(Bukkit.getServer().getWorld(HerobrineOld.getPluginCore().getConfigDB().HerobrineWorldName), -2.49, 4, -4.12));
 		HandlerInterval();
 
 	}
@@ -100,7 +100,7 @@ public class Graveyard extends Core {
 
 	public void Handler() {
 
-		LivingEntities = Bukkit.getServer().getWorld(Herobrine.getPluginCore().getConfigDB().HerobrineWorldName).getLivingEntities();
+		LivingEntities = Bukkit.getServer().getWorld(HerobrineOld.getPluginCore().getConfigDB().HerobrineWorldName).getLivingEntities();
 		for (int i = 0; i <= LivingEntities.size() - 1; i++) {
 
 			if (LivingEntities.get(i) instanceof Player
@@ -115,11 +115,11 @@ public class Graveyard extends Core {
 
 		if (savedPlayer.isDead() == true 
 			|| savedPlayer.isOnline() == false
-			|| savedPlayer.getLocation().getWorld() != Bukkit.getServer().getWorld(Herobrine.getPluginCore().getConfigDB().HerobrineWorldName)
+			|| savedPlayer.getLocation().getWorld() != Bukkit.getServer().getWorld(HerobrineOld.getPluginCore().getConfigDB().HerobrineWorldName)
 			|| this.ticks == 90 || AICore.isTarget == false) {
 			
 			if (AICore.PlayerTarget == savedPlayer) {
-				Herobrine.getPluginCore().getAICore().CancelTarget(CoreType.GRAVEYARD);
+				HerobrineOld.getPluginCore().getAICore().CancelTarget(CoreType.GRAVEYARD);
 			}
 			
 			savedPlayer.teleport(new Location(savedWorld, savedX, savedY, savedZ));
@@ -131,27 +131,27 @@ public class Graveyard extends Core {
 			PluginCore.HerobrineNPC.lookAtPoint(ploc);
 			if (ticks == 1) {
 				PluginCore.HerobrineNPC.moveTo(
-						new Location(Bukkit.getServer().getWorld(Herobrine.getPluginCore().getConfigDB().HerobrineWorldName), -2.49, 4, -4.12));
+						new Location(Bukkit.getServer().getWorld(HerobrineOld.getPluginCore().getConfigDB().HerobrineWorldName), -2.49, 4, -4.12));
 			} else if (ticks == 40) {
 				PluginCore.HerobrineNPC.moveTo(
-						new Location(Bukkit.getServer().getWorld(Herobrine.getPluginCore().getConfigDB().HerobrineWorldName), -2.49, 4, -0.5));
+						new Location(Bukkit.getServer().getWorld(HerobrineOld.getPluginCore().getConfigDB().HerobrineWorldName), -2.49, 4, -0.5));
 			} else if (ticks == 60) {
 				PluginCore.HerobrineNPC.moveTo(
-						new Location(Bukkit.getServer().getWorld(Herobrine.getPluginCore().getConfigDB().HerobrineWorldName), -2.49, 4, 5.1));
+						new Location(Bukkit.getServer().getWorld(HerobrineOld.getPluginCore().getConfigDB().HerobrineWorldName), -2.49, 4, 5.1));
 
 			} else if (ticks == 84) {
 				PluginCore.HerobrineNPC.moveTo(
-						new Location(Bukkit.getServer().getWorld(Herobrine.getPluginCore().getConfigDB().HerobrineWorldName), -2.49, 4, 7.5));
+						new Location(Bukkit.getServer().getWorld(HerobrineOld.getPluginCore().getConfigDB().HerobrineWorldName), -2.49, 4, 7.5));
 
 			}
 
 			Random randomGen = Utils.getRandomGen();
 			
 			if (randomGen.nextInt(4) == 1) {
-				Location newloc = new Location(Bukkit.getServer().getWorld(Herobrine.getPluginCore().getConfigDB().HerobrineWorldName),
+				Location newloc = new Location(Bukkit.getServer().getWorld(HerobrineOld.getPluginCore().getConfigDB().HerobrineWorldName),
 						(double) randomGen.nextInt(400), (double) Utils.getRandomGen().nextInt(20) + 20,
 						(double) randomGen.nextInt(400));
-				Bukkit.getServer().getWorld(Herobrine.getPluginCore().getConfigDB().HerobrineWorldName).strikeLightning(newloc);
+				Bukkit.getServer().getWorld(HerobrineOld.getPluginCore().getConfigDB().HerobrineWorldName).strikeLightning(newloc);
 			}
 			ticks++;
 			HandlerInterval();
