@@ -1,11 +1,14 @@
 package net.theprogrammersworld.herobrine;
 
+import net.theprogrammersworld.herobrine.util.debug.DebugLevel;
 import net.theprogrammersworld.herobrine.util.exceptions.ConfigException;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 
 public class ConfigDB {
+    public DebugLevel logLevel;
+
     private YamlConfiguration config;
 
     private File configFile;
@@ -41,15 +44,15 @@ public class ConfigDB {
     }
 
     public void loadData(){
-
+        logLevel = DebugLevel.valueOfName(config.getString("logLevel"));
     }
 
     public void saveData(){
-
+        config.set("logLevel", logLevel.name);
     }
 
     public void setDefaults(){
-
+        config.addDefault("logLevel", DebugLevel.Info.name);
     }
 
     public void loadFiles(){
