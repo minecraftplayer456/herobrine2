@@ -1,151 +1,152 @@
 package net.theprogrammersworld.herobrine.AIold.cores;
 
-import java.util.ArrayList;
-import java.util.Random;
-
+import net.theprogrammersworld.herobrine.AIold.AICore;
+import net.theprogrammersworld.herobrine.AIold.Core;
+import net.theprogrammersworld.herobrine.AIold.CoreResult;
+import net.theprogrammersworld.herobrine.HerobrineOld;
+import net.theprogrammersworld.herobrine.Utils;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 
-import net.theprogrammersworld.herobrine.HerobrineOld;
-import net.theprogrammersworld.herobrine.Utils;
-import net.theprogrammersworld.herobrine.AIold.*;
+import java.util.ArrayList;
+import java.util.Random;
 
 public class BuildCave extends Core {
 
-	public BuildCave() {
-		super(CoreType.BUILD_CAVE, AppearType.NORMAL, HerobrineOld.getPluginCore());
-	}
+    public BuildCave() {
+        super(CoreType.BUILD_CAVE, AppearType.NORMAL, HerobrineOld.getPluginCore());
+    }
 
-	public CoreResult CallCore(Object[] data) {
-		if (data.length == 2) {
-			return buildCave((Location) data[0], true);
-		}
-		return buildCave((Location) data[0]);
-	}
+    public CoreResult CallCore(Object[] data) {
+        if (data.length == 2) {
+            return buildCave((Location) data[0], true);
+        }
+        return buildCave((Location) data[0]);
+    }
 
-	public CoreResult buildCave(Location loc) {
+    public CoreResult buildCave(Location loc) {
 
-		if (HerobrineOld.getPluginCore().getConfigDB().BuildStuff == true) {
-			if (HerobrineOld.getPluginCore().getSupport().checkBuild(loc)) {
-				if (loc.getBlockY() < 60) {
+        if (HerobrineOld.getPluginCore().getConfigDB().BuildStuff == true) {
+            if (HerobrineOld.getPluginCore().getSupport().checkBuild(loc)) {
+                if (loc.getBlockY() < 60) {
 
-					int chance = Utils.getRandomGen().nextInt(100);
-					if (chance > (100 - HerobrineOld.getPluginCore().getConfigDB().CaveChance)) {
-						AICore.log.info("Creating cave...");
+                    int chance = Utils.getRandomGen().nextInt(100);
+                    if (chance > (100 - HerobrineOld.getPluginCore().getConfigDB().CaveChance)) {
+                        AICore.log.info("Creating cave...");
 
-						GenerateCave(loc);
+                        GenerateCave(loc);
 
-						return new CoreResult(false, "Cave created.");
+                        return new CoreResult(false, "Cave created.");
 
-					} else {
-						return new CoreResult(false, "Cave generation failed.");
-					}
-				} else {
-					return new CoreResult(false, "Caves can only be generated in locations where the Y coordinate is less than or equal to 60.");
-				}
-			} else {
-				return new CoreResult(false, "Cannot build stuff.");
-			}
-		} else {
-			return new CoreResult(false, "Player is in a secure location.");
-		}
+                    } else {
+                        return new CoreResult(false, "Cave generation failed.");
+                    }
+                } else {
+                    return new CoreResult(false, "Caves can only be generated in locations where the Y coordinate is less than or equal to 60.");
+                }
+            } else {
+                return new CoreResult(false, "Cannot build stuff.");
+            }
+        } else {
+            return new CoreResult(false, "Player is in a secure location.");
+        }
 
-	}
+    }
 
-	public CoreResult buildCave(Location loc, boolean cmd) {
+    public CoreResult buildCave(Location loc, boolean cmd) {
 
-		if (HerobrineOld.getPluginCore().getSupport().checkBuild(loc)) {
-			if (loc.getBlockY() < 60) {
+        if (HerobrineOld.getPluginCore().getSupport().checkBuild(loc)) {
+            if (loc.getBlockY() < 60) {
 
-				AICore.log.info("Creating cave...");
+                AICore.log.info("Creating cave...");
 
-				GenerateCave(loc);
+                GenerateCave(loc);
 
-				return new CoreResult(false, "Cave created.");
+                return new CoreResult(false, "Cave created.");
 
-			} else {
-				return new CoreResult(false, "Caves can only be generated in locations where the Y coordinate is less than or equal to 60.");
-			}
-		} else {
-			return new CoreResult(false, "Player is in a secure location.");
-		}
+            } else {
+                return new CoreResult(false, "Caves can only be generated in locations where the Y coordinate is less than or equal to 60.");
+            }
+        } else {
+            return new CoreResult(false, "Player is in a secure location.");
+        }
 
-	}
+    }
 
-	public void GenerateCave(Location loc) {
+    public void GenerateCave(Location loc) {
 
-		if (HerobrineOld.getPluginCore().getSupport().checkBuild(loc)) {
+        if (HerobrineOld.getPluginCore().getSupport().checkBuild(loc)) {
 
-			ArrayList<Location> redstoneTorchList = new ArrayList<Location>();
-			
-			Random rand = Utils.getRandomGen();
-			
-			boolean goByX = rand.nextBoolean();
-			boolean goNegative = rand.nextBoolean();
+            ArrayList<Location> redstoneTorchList = new ArrayList<Location>();
 
-			int baseX = loc.getBlockX();
-			int baseZ = loc.getBlockZ();
-			int baseY = loc.getBlockY();
+            Random rand = Utils.getRandomGen();
 
-			int finalX = 0;
-			int finalZ = 0;
+            boolean goByX = rand.nextBoolean();
+            boolean goNegative = rand.nextBoolean();
 
-			int maxL = rand.nextInt(10) + 4;
-			int iR = rand.nextInt(3) + 4;
-			int iNow = 0;
-			
-			while (iNow != iR) {
-				
-				iNow++;
-				goByX = rand.nextBoolean();
-				goNegative = rand.nextBoolean();
-				int i = 0;
-				
-				for (i = 0; i <= maxL; i++) {
-					finalX = 0;
-					finalZ = 0;
-					if (goNegative) {
-						if (goByX) {
-							finalX = -1;
-						} else {
-							finalZ = -1;
-						}
-					} else {
-						if (goByX) {
-							finalX = 1;
-						} else {
-							finalZ = 1;
-						}
-					}
+            int baseX = loc.getBlockX();
+            int baseZ = loc.getBlockZ();
+            int baseY = loc.getBlockY();
 
-					baseX = baseX + finalX;
-					baseZ = baseZ + finalZ;
+            int finalX = 0;
+            int finalZ = 0;
 
-					loc.getWorld().getBlockAt(baseX, baseY, baseZ).breakNaturally(null);
-					loc.getWorld().getBlockAt(baseX, baseY + 1, baseZ).breakNaturally(null);
-					
-					if (rand.nextBoolean()) {
-						redstoneTorchList.add(new Location(loc.getWorld(), baseX, baseY, baseZ));
-					}
-				}
-			}
+            int maxL = rand.nextInt(10) + 4;
+            int iR = rand.nextInt(3) + 4;
+            int iNow = 0;
 
-			for (Location _loc : redstoneTorchList) {
-				PlaceRedstoneTorch(_loc.getWorld(), _loc.getBlockX(), _loc.getBlockY(), _loc.getBlockZ());
-			}
+            while (iNow != iR) {
 
-			AICore.log.info("Cave created.");
+                iNow++;
+                goByX = rand.nextBoolean();
+                goNegative = rand.nextBoolean();
+                int i = 0;
 
-		}
-	}
+                for (i = 0; i <= maxL; i++) {
+                    finalX = 0;
+                    finalZ = 0;
+                    if (goNegative) {
+                        if (goByX) {
+                            finalX = -1;
+                        } else {
+                            finalZ = -1;
+                        }
+                    } else {
+                        if (goByX) {
+                            finalX = 1;
+                        } else {
+                            finalZ = 1;
+                        }
+                    }
 
-	public void PlaceRedstoneTorch(World world, int x, int y, int z) {
-		Random randgen = Utils.getRandomGen();
-		int chance = randgen.nextInt(100);
-		if (chance > 70) {
-			world.getBlockAt(x, y, z).setType(Material.REDSTONE_TORCH);
-		}
-	}
+                    baseX = baseX + finalX;
+                    baseZ = baseZ + finalZ;
+
+                    loc.getWorld().getBlockAt(baseX, baseY, baseZ).breakNaturally(null);
+                    loc.getWorld().getBlockAt(baseX, baseY + 1, baseZ).breakNaturally(null);
+
+                    if (rand.nextBoolean()) {
+                        redstoneTorchList.add(new Location(loc.getWorld(), baseX, baseY, baseZ));
+                    }
+                }
+            }
+
+            for (Location _loc : redstoneTorchList) {
+                PlaceRedstoneTorch(_loc.getWorld(), _loc.getBlockX(), _loc.getBlockY(), _loc.getBlockZ());
+            }
+
+            AICore.log.info("Cave created.");
+
+        }
+    }
+
+    public void PlaceRedstoneTorch(World world, int x, int y, int z) {
+        Random randgen = Utils.getRandomGen();
+        int chance = randgen.nextInt(100);
+        if (chance > 70) {
+            world.getBlockAt(x, y, z).setType(Material.REDSTONE_TORCH);
+        }
+    }
 
 }

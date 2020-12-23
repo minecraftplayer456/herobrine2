@@ -31,11 +31,11 @@ public class Herobrine extends JavaPlugin implements Listener {
         configDB.shutdown();
     }
 
-    public Debug getDebug(){
+    public Debug getDebug() {
         return debug;
     }
 
-    public ConfigDB getConfigDB(){
+    public ConfigDB getConfigDB() {
         return configDB;
     }
 }

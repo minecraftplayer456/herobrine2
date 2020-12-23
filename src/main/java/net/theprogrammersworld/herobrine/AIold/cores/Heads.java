@@ -1,98 +1,97 @@
 package net.theprogrammersworld.herobrine.AIold.cores;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
+import net.theprogrammersworld.herobrine.AIold.AICore;
+import net.theprogrammersworld.herobrine.AIold.Core;
+import net.theprogrammersworld.herobrine.AIold.CoreResult;
+import net.theprogrammersworld.herobrine.HerobrineOld;
+import net.theprogrammersworld.herobrine.Utils;
+import net.theprogrammersworld.herobrine.miscold.BlockChanger;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
-import net.theprogrammersworld.herobrine.HerobrineOld;
-import net.theprogrammersworld.herobrine.Utils;
-import net.theprogrammersworld.herobrine.AIold.AICore;
-import net.theprogrammersworld.herobrine.AIold.Core;
-import net.theprogrammersworld.herobrine.AIold.CoreResult;
-import net.theprogrammersworld.herobrine.miscold.BlockChanger;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class Heads extends Core {
 
-	private boolean isCalled = false;
-	private List<Block> headList = new ArrayList<Block>();
+    private final List<Block> headList = new ArrayList<Block>();
+    private boolean isCalled = false;
 
-	public Heads() {
-		super(CoreType.HEADS, AppearType.NORMAL, HerobrineOld.getPluginCore());
-	}
+    public Heads() {
+        super(CoreType.HEADS, AppearType.NORMAL, HerobrineOld.getPluginCore());
+    }
 
-	public CoreResult CallCore(Object[] data) {
-		if (isCalled == false) {
-			if (Bukkit.getPlayer((String) data[0]).isOnline()) {
-				Player player = (Player) Bukkit.getServer().getPlayer((String) data[0]);
-				if (PluginCore.getSupport().checkBuild(player.getLocation())) {
-					if (PluginCore.getConfigDB().UseHeads) {
+    public CoreResult CallCore(Object[] data) {
+        if (isCalled == false) {
+            if (Bukkit.getPlayer((String) data[0]).isOnline()) {
+                Player player = Bukkit.getServer().getPlayer((String) data[0]);
+                if (PluginCore.getSupport().checkBuild(player.getLocation())) {
+                    if (PluginCore.getConfigDB().UseHeads) {
 
-						Location loc = player.getLocation();
-						int px = loc.getBlockX();
-						int pz = loc.getBlockZ();
-						int y = 0;
-						int x = -7;
-						int z = -7;
-						
-						Random randomGen = Utils.getRandomGen();
-						
-						for (x = -7; x <= 7; x++) {
-							for (z = -7; z <= 7; z++) {
-								if (randomGen.nextInt(7) == randomGen.nextInt(7)) {
+                        Location loc = player.getLocation();
+                        int px = loc.getBlockX();
+                        int pz = loc.getBlockZ();
+                        int y = 0;
+                        int x = -7;
+                        int z = -7;
 
-									if (!loc.getWorld().getHighestBlockAt(px + x, pz + z).getType().isSolid()) {
-										y = loc.getWorld().getHighestBlockYAt(px + x, pz + z);
-									} else {
-										y = loc.getWorld().getHighestBlockYAt(px + x, pz + z) + 1;
-									}
+                        Random randomGen = Utils.getRandomGen();
 
-									Block block = loc.getWorld().getBlockAt(px + x, y, pz + z);
-									BlockChanger.PlaceSkull(block.getLocation(), player.getUniqueId());
+                        for (x = -7; x <= 7; x++) {
+                            for (z = -7; z <= 7; z++) {
+                                if (randomGen.nextInt(7) == randomGen.nextInt(7)) {
 
-									headList.add(block);
+                                    if (!loc.getWorld().getHighestBlockAt(px + x, pz + z).getType().isSolid()) {
+                                        y = loc.getWorld().getHighestBlockYAt(px + x, pz + z);
+                                    } else {
+                                        y = loc.getWorld().getHighestBlockYAt(px + x, pz + z) + 1;
+                                    }
 
-								}
-							}
-						}
+                                    Block block = loc.getWorld().getBlockAt(px + x, y, pz + z);
+                                    BlockChanger.PlaceSkull(block.getLocation(), player.getUniqueId());
 
-						isCalled = true;
-						Bukkit.getScheduler().scheduleSyncDelayedTask(AICore.plugin, new Runnable() {
-							public void run() {
-								RemoveHeads();
-							}
-						}, 1 * 100L);
+                                    headList.add(block);
 
-						return new CoreResult(true, "Herobrine spawned heads near " + player.getDisplayName() + ".");
+                                }
+                            }
+                        }
 
-					} else {
-						return new CoreResult(false, "Herobrine head-spawning is disabled.");
-					}
-				} else {
-					return new CoreResult(false, player.getDisplayName() + " cannot be haunted with heads because they are in a secure area.");
-				}
-			} else {
-				return new CoreResult(false, "Player cannot be haunted with heads because they are offline.");
-			}
-		} else {
-			return new CoreResult(false, "Herobrine head-spawning is on a cooldown period.");
-		}
-	}
+                        isCalled = true;
+                        Bukkit.getScheduler().scheduleSyncDelayedTask(AICore.plugin, new Runnable() {
+                            public void run() {
+                                RemoveHeads();
+                            }
+                        }, 1 * 100L);
 
-	public void RemoveHeads() {
-		for (Block h : headList) {
-			h.setType(Material.AIR);
-		}
-		headList.clear();
-		isCalled = false;
-	}
+                        return new CoreResult(true, "Herobrine spawned heads near " + player.getDisplayName() + ".");
 
-	public ArrayList<Block> getHeadList() {
-		return (ArrayList<Block>) headList;
-	}
+                    } else {
+                        return new CoreResult(false, "Herobrine head-spawning is disabled.");
+                    }
+                } else {
+                    return new CoreResult(false, player.getDisplayName() + " cannot be haunted with heads because they are in a secure area.");
+                }
+            } else {
+                return new CoreResult(false, "Player cannot be haunted with heads because they are offline.");
+            }
+        } else {
+            return new CoreResult(false, "Herobrine head-spawning is on a cooldown period.");
+        }
+    }
+
+    public void RemoveHeads() {
+        for (Block h : headList) {
+            h.setType(Material.AIR);
+        }
+        headList.clear();
+        isCalled = false;
+    }
+
+    public ArrayList<Block> getHeadList() {
+        return (ArrayList<Block>) headList;
+    }
 }

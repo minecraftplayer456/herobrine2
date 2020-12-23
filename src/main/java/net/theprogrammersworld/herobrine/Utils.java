@@ -1,40 +1,40 @@
 package net.theprogrammersworld.herobrine;
 
-import java.util.Collection;
-import java.util.Random;
-
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+import java.util.Collection;
+import java.util.Random;
+
 public class Utils {
 
-	private static Random randomGen = new Random();
-	
-	public static Random getRandomGen(){
-		return randomGen;
-	}
-	
-	public static Player getRandomPlayer() {
-		Collection<? extends Player> playersOnline = Bukkit.getServer().getOnlinePlayers();
+    private static final Random randomGen = new Random();
 
-		if(playersOnline.size() == 1 && ((Player)playersOnline.toArray()[0]).getEntityId() == HerobrineOld.getPluginCore().HerobrineEntityID)
-			return null;
-		
-		int player_rolled = new Random().nextInt(playersOnline.size());
+    public static Random getRandomGen() {
+        return randomGen;
+    }
 
-		Player p = (Player) playersOnline.toArray()[player_rolled];
-		
-		if (p.getEntityId() == HerobrineOld.getPluginCore().HerobrineEntityID)
-			return getRandomPlayer();
-		
-		return p;
+    public static Player getRandomPlayer() {
+        Collection<? extends Player> playersOnline = Bukkit.getServer().getOnlinePlayers();
 
-	}
+        if (playersOnline.size() == 1 && ((Player) playersOnline.toArray()[0]).getEntityId() == HerobrineOld.getPluginCore().HerobrineEntityID)
+            return null;
 
-	public static int getRandomPlayerNum() {
-		Collection<? extends Player> playersOnline = Bukkit.getServer().getOnlinePlayers();
-		
-		return new Random().nextInt(playersOnline.size());
-	}
+        int player_rolled = new Random().nextInt(playersOnline.size());
+
+        Player p = (Player) playersOnline.toArray()[player_rolled];
+
+        if (p.getEntityId() == HerobrineOld.getPluginCore().HerobrineEntityID)
+            return getRandomPlayer();
+
+        return p;
+
+    }
+
+    public static int getRandomPlayerNum() {
+        Collection<? extends Player> playersOnline = Bukkit.getServer().getOnlinePlayers();
+
+        return new Random().nextInt(playersOnline.size());
+    }
 
 }

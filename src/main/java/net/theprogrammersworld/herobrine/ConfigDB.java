@@ -22,51 +22,51 @@ public class ConfigDB {
 
         setDefaults();
 
-        if(!configFile.exists()){
-            try{
+        if (!configFile.exists()) {
+            try {
                 //No config files exists, make a new one and write it with default values
                 loadData();
                 saveFiles();
-            }catch (Exception e){
+            } catch (Exception e) {
                 throw new ConfigException("Could not create new config file", e);
             }
-        }else{
+        } else {
             //Load existing config files
             loadFiles();
             loadData();
         }
     }
 
-    public void shutdown(){
+    public void shutdown() {
         //Save config files
         saveData();
         saveFiles();
     }
 
-    public void loadData(){
+    public void loadData() {
         logLevel = DebugLevel.valueOfName(config.getString("logLevel"));
     }
 
-    public void saveData(){
+    public void saveData() {
         config.set("logLevel", logLevel.name);
     }
 
-    public void setDefaults(){
+    public void setDefaults() {
         config.addDefault("logLevel", DebugLevel.Info.name);
     }
 
-    public void loadFiles(){
-        try{
+    public void loadFiles() {
+        try {
             config.load(configFile);
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new ConfigException("Could not load config file", e);
         }
     }
 
-    public void saveFiles(){
-        try{
+    public void saveFiles() {
+        try {
             config.save(configFile);
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new ConfigException("Could not save config file", e);
         }
     }

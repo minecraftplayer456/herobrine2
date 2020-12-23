@@ -5,13 +5,13 @@ import net.minecraft.server.v1_16_R3.NetworkManager;
 
 public class NetworkCore extends NetworkManager {
 
-	public NetworkCore() {
-		super(EnumProtocolDirection.SERVERBOUND);
-	}
+    public NetworkCore() {
+        super(EnumProtocolDirection.SERVERBOUND);
+    }
 
-	@Override
-	public void a() {
+    @Override
+    public void a() {
 
-	}
+    }
 
 }

@@ -3,7 +3,7 @@ package net.theprogrammersworld.herobrine.util.exceptions;
 /**
  * Exception throw when something with the configuration files went wrong
  */
-public class ConfigException extends RuntimeException{
+public class ConfigException extends RuntimeException {
     public ConfigException() {
     }
 

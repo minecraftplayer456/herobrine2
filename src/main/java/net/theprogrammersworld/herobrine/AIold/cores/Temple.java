@@ -1,8 +1,12 @@
 package net.theprogrammersworld.herobrine.AIold.cores;
 
-import java.util.ArrayList;
-import java.util.Random;
-
+import net.theprogrammersworld.herobrine.AIold.Core;
+import net.theprogrammersworld.herobrine.AIold.CoreResult;
+import net.theprogrammersworld.herobrine.HerobrineOld;
+import net.theprogrammersworld.herobrine.Utils;
+import net.theprogrammersworld.herobrine.entityold.MobType;
+import net.theprogrammersworld.herobrine.miscold.ItemName;
+import net.theprogrammersworld.herobrine.miscold.StructureLoader;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -12,225 +16,204 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import net.theprogrammersworld.herobrine.HerobrineOld;
-import net.theprogrammersworld.herobrine.Utils;
-import net.theprogrammersworld.herobrine.AIold.Core;
-import net.theprogrammersworld.herobrine.AIold.CoreResult;
-import net.theprogrammersworld.herobrine.entityold.MobType;
-import net.theprogrammersworld.herobrine.miscold.ItemName;
-import net.theprogrammersworld.herobrine.miscold.StructureLoader;
+import java.util.ArrayList;
+import java.util.Random;
 
 public class Temple extends Core {
 
-	public Temple() {
-		super(CoreType.TEMPLE, AppearType.NORMAL, HerobrineOld.getPluginCore());
-	}
+    public Temple() {
+        super(CoreType.TEMPLE, AppearType.NORMAL, HerobrineOld.getPluginCore());
+    }
 
-	public CoreResult CallCore(Object[] data) {
-		if (data[0] instanceof Player) {
-			return FindPlacePlayer((Player) data[0]);
-		} else {
-			return FindPlacePlayer((Chunk) data[0]);
-		}
-	}
-	
-	// TODO Change this nonsense
-	public CoreResult FindPlacePlayer(Player player) {
+    public CoreResult CallCore(Object[] data) {
+        if (data[0] instanceof Player) {
+            return FindPlacePlayer((Player) data[0]);
+        } else {
+            return FindPlacePlayer((Chunk) data[0]);
+        }
+    }
 
-		Location loc = player.getLocation();
+    // TODO Change this nonsense
+    public CoreResult FindPlacePlayer(Player player) {
 
-		boolean canBuild = true;
-		int i1 = 0;
-		int i2 = 0;
-		int i3 = 0;
-		int i4 = 0;
-		int i5 = 0;
-		int i6 = 0;
+        Location loc = player.getLocation();
 
-		for (i1 = -5; i1 <= 5; i1++) {// Y
-			for (i2 = -20; i2 <= 20; i2++) {// X
-				for (i3 = -20; i3 <= 20; i3++) {// Z
-					canBuild = true;
+        boolean canBuild = true;
+        int i1 = 0;
+        int i2 = 0;
+        int i3 = 0;
+        int i4 = 0;
+        int i5 = 0;
+        int i6 = 0;
 
-					for (i4 = -1; i4 <= 12; i4++) {// Y
-						for (i5 = 0; i5 <= 11; i5++) {// X
-							for (i6 = 0; i6 <= 10; i6++) {// Z
+        for (i1 = -5; i1 <= 5; i1++) {// Y
+            for (i2 = -20; i2 <= 20; i2++) {// X
+                for (i3 = -20; i3 <= 20; i3++) {// Z
+                    canBuild = true;
 
-								if (player.getLocation().getBlockX() == i2 + i5 + loc.getBlockX()
-										&& player.getLocation().getBlockY() == i1 + i4 + loc.getBlockY()
-										&& player.getLocation().getBlockZ() == i3 + i6 + loc.getBlockZ()) {
-									canBuild = false;
-								}
-								if (i4 == -1) {
-									if (canBuild == true) {
-										if (loc.getWorld().getBlockAt(i2 + i5 + loc.getBlockX(),i1 + i4 + loc.getBlockY(), i3 + i6 + loc.getBlockZ()).getType().isSolid()) {
-											canBuild = true;
-										} else {
-											canBuild = false;
-										}
-									}
-								} else {
-									if (canBuild == true) {
-										if (!loc.getWorld().getBlockAt(i2 + i5 + loc.getBlockX(), i1 + i4 + loc.getBlockY(), i3 + i6 + loc.getBlockZ()).getType().isSolid()) {
-											canBuild = true;
-										} else {
-											canBuild = false;
-										}
-									}
+                    for (i4 = -1; i4 <= 12; i4++) {// Y
+                        for (i5 = 0; i5 <= 11; i5++) {// X
+                            for (i6 = 0; i6 <= 10; i6++) {// Z
 
-								}
+                                if (player.getLocation().getBlockX() == i2 + i5 + loc.getBlockX()
+                                        && player.getLocation().getBlockY() == i1 + i4 + loc.getBlockY()
+                                        && player.getLocation().getBlockZ() == i3 + i6 + loc.getBlockZ()) {
+                                    canBuild = false;
+                                }
+                                if (i4 == -1) {
+                                    if (canBuild == true) {
+                                        canBuild = loc.getWorld().getBlockAt(i2 + i5 + loc.getBlockX(), i1 + i4 + loc.getBlockY(), i3 + i6 + loc.getBlockZ()).getType().isSolid();
+                                    }
+                                } else {
+                                    if (canBuild == true) {
+                                        canBuild = !loc.getWorld().getBlockAt(i2 + i5 + loc.getBlockX(), i1 + i4 + loc.getBlockY(), i3 + i6 + loc.getBlockZ()).getType().isSolid();
+                                    }
 
-							}
+                                }
 
-						}
-					}
-					if (canBuild == true) {
-						Create(loc.getWorld(), i2 + loc.getBlockX(), i1 + loc.getBlockY(), i3 + loc.getBlockZ());
-						return new CoreResult(true, "Creating a temple near " + player.getDisplayName() + ".");
-					}
-				}
+                            }
 
-			}
+                        }
+                    }
+                    if (canBuild == true) {
+                        Create(loc.getWorld(), i2 + loc.getBlockX(), i1 + loc.getBlockY(), i3 + loc.getBlockZ());
+                        return new CoreResult(true, "Creating a temple near " + player.getDisplayName() + ".");
+                    }
+                }
 
-		}
+            }
 
-		return new CoreResult(false, "Cannot find a good place to create a temple.");
+        }
 
-	}
+        return new CoreResult(false, "Cannot find a good place to create a temple.");
 
-	public CoreResult FindPlacePlayer(Chunk chunk) {
+    }
 
-		Location loc = chunk.getBlock(2, 0, 2).getLocation();
-		loc = loc.getWorld().getHighestBlockAt(loc).getLocation();
+    public CoreResult FindPlacePlayer(Chunk chunk) {
 
-		boolean canBuild = true;
-		int i1 = 0;
-		int i2 = 0;
-		int i3 = 0;
-		int i4 = 0;
-		int i5 = 0;
-		int i6 = 0;
+        Location loc = chunk.getBlock(2, 0, 2).getLocation();
+        loc = loc.getWorld().getHighestBlockAt(loc).getLocation();
 
-		i1 = 0;
-		i2 = 0;
-		i3 = 0;
-		i4 = 0;
-		i5 = 0;
-		i6 = 0;
+        boolean canBuild = true;
+        int i1 = 0;
+        int i2 = 0;
+        int i3 = 0;
+        int i4 = 0;
+        int i5 = 0;
+        int i6 = 0;
 
-		for (i1 = -5; i1 <= 5; i1++) {// Y
+        i1 = 0;
+        i2 = 0;
+        i3 = 0;
+        i4 = 0;
+        i5 = 0;
+        i6 = 0;
 
-			canBuild = true;
+        for (i1 = -5; i1 <= 5; i1++) {// Y
 
-			for (i4 = -1; i4 <= 12; i4++) {// Y
-				for (i5 = 0; i5 <= 11; i5++) {// X
-					for (i6 = 0; i6 <= 10; i6++) {// Z
+            canBuild = true;
 
-						if (loc.getBlockX() == i2 + i5 + loc.getBlockX() && loc.getBlockY() == i1 + i4 + loc.getBlockY()
-								&& loc.getBlockZ() == i3 + i6 + loc.getBlockZ()) {
-							canBuild = false;
-						}
-						if (i4 == -1) {
-							if (canBuild == true) {
-								if (loc.getWorld().getBlockAt(i2 + i5 + loc.getBlockX(), i1 + i4 + loc.getBlockY(), i3 + i6 + loc.getBlockZ()).getType().isSolid()) {
-									canBuild = true;
-								} else {
-									canBuild = false;
-								}
-							}
-						} else {
-							if (canBuild == true) {
-								if (!loc.getWorld().getBlockAt(i2 + i5 + loc.getBlockX(),i1 + i4 + loc.getBlockY(), i3 + i6 + loc.getBlockZ()).getType().isSolid()) {
-									canBuild = true;
-								} else {
-									canBuild = false;
-								}
-							}
+            for (i4 = -1; i4 <= 12; i4++) {// Y
+                for (i5 = 0; i5 <= 11; i5++) {// X
+                    for (i6 = 0; i6 <= 10; i6++) {// Z
 
-						}
+                        if (loc.getBlockX() == i2 + i5 + loc.getBlockX() && loc.getBlockY() == i1 + i4 + loc.getBlockY()
+                                && loc.getBlockZ() == i3 + i6 + loc.getBlockZ()) {
+                            canBuild = false;
+                        }
+                        if (i4 == -1) {
+                            if (canBuild == true) {
+                                canBuild = loc.getWorld().getBlockAt(i2 + i5 + loc.getBlockX(), i1 + i4 + loc.getBlockY(), i3 + i6 + loc.getBlockZ()).getType().isSolid();
+                            }
+                        } else {
+                            if (canBuild == true) {
+                                canBuild = !loc.getWorld().getBlockAt(i2 + i5 + loc.getBlockX(), i1 + i4 + loc.getBlockY(), i3 + i6 + loc.getBlockZ()).getType().isSolid();
+                            }
 
-					}
+                        }
 
-				}
-			}
-			if (canBuild == true) {
-				Create(loc.getWorld(), i2 + loc.getBlockX(), i1 + loc.getBlockY(), i3 + loc.getBlockZ());
-				return new CoreResult(true, "Creating temple.");
-			}
+                    }
 
-		}
+                }
+            }
+            if (canBuild == true) {
+                Create(loc.getWorld(), i2 + loc.getBlockX(), i1 + loc.getBlockY(), i3 + loc.getBlockZ());
+                return new CoreResult(true, "Creating temple.");
+            }
 
-		return new CoreResult(false, "Cannot find a good place to create a temple.");
+        }
 
-	}
+        return new CoreResult(false, "Cannot find a good place to create a temple.");
 
-	public void Create(World world, int X, int Y, int Z) {
+    }
 
-		Location loc = new Location(world, X, Y, Z);
+    public void Create(World world, int X, int Y, int Z) {
 
-		if (HerobrineOld.getPluginCore().getSupport().checkBuild(new Location(world, X, Y, Z))) {
+        Location loc = new Location(world, X, Y, Z);
 
-			int MainX = loc.getBlockX();
-			int MainY = loc.getBlockY();
-			int MainZ = loc.getBlockZ();
+        if (HerobrineOld.getPluginCore().getSupport().checkBuild(new Location(world, X, Y, Z))) {
 
-			// Main blocks
+            int MainX = loc.getBlockX();
+            int MainY = loc.getBlockY();
+            int MainZ = loc.getBlockZ();
 
-			new StructureLoader(HerobrineOld.getPluginCore().getInputStreamData("/res/temple.yml")).Build(loc.getWorld(),
-					MainX, MainY, MainZ);
-			loc.getWorld().getBlockAt(MainX + 6, MainY + 0, MainZ + 2).setType(Material.CHEST);
-			// Mob spawn
-			if (!HerobrineOld.isNPCDisabled) {
-				if (HerobrineOld.getPluginCore().getConfigDB().UseNPC_Guardian) {
-					Location mobloc = new Location(loc.getWorld(), MainX + 6, MainY + 0, MainZ + 4);
-					for (int i = 1; i <= HerobrineOld.getPluginCore().getConfigDB().npc.getInt("npc.Guardian.SpawnCount"); i++) {
-						HerobrineOld.getPluginCore().getEntityManager().spawnCustomZombie(mobloc, MobType.ARTIFACT_GUARDIAN);
-					}
-				}
-			}
-			// Chest			
-			Random generator = Utils.getRandomGen();
-			int chance = generator.nextInt(15);
-			ItemStack item = null;
-			ArrayList<String> newLore = new ArrayList<String>();
-			
-			if (chance < 4 && HerobrineOld.getPluginCore().getConfigDB().UseArtifactBow) {
-				
-				item = new ItemStack(Material.BOW);
-				newLore.add("Herobrine artifact");
-				newLore.add("Bow of Teleporting");
-				item = ItemName.setNameAndLore(item, "Bow of Teleporting", newLore);
-				item.addEnchantment(Enchantment.ARROW_FIRE, 1);
-				item.addEnchantment(Enchantment.ARROW_KNOCKBACK, 1);
-				
-			} else if (chance < 8 && HerobrineOld.getPluginCore().getConfigDB().UseArtifactSword) {
-				
-				item = new ItemStack(Material.DIAMOND_SWORD);
-				newLore.add("Herobrine artifact");
-				newLore.add("Sword of Lightning");
-				item = ItemName.setNameAndLore(item, "Sword of Lightning", newLore);
-				item.addEnchantment(Enchantment.KNOCKBACK, 2);
-				item.addEnchantment(Enchantment.DAMAGE_ALL, 2);
-				item.addEnchantment(Enchantment.DURABILITY, 3);
-				
-			} else if (chance < 12 && HerobrineOld.getPluginCore().getConfigDB().UseArtifactApple) {
-				
-				item = new ItemStack(Material.GOLDEN_APPLE);
-				newLore.add("Herobrine artifact");
-				newLore.add("Apple of Death");
-				item = ItemName.setNameAndLore(item, "Apple of Death", newLore);
+            // Main blocks
 
-			} else {
-				if (HerobrineOld.getPluginCore().getConfigDB().UseAncientSword) {
-					item = HerobrineOld.getPluginCore().getAICore().createAncientSword();
-					item.addEnchantment(Enchantment.KNOCKBACK, 2);
-					item.addEnchantment(Enchantment.DAMAGE_ALL, 2);
-				}
-			}
+            new StructureLoader(HerobrineOld.getPluginCore().getInputStreamData("/res/temple.yml")).Build(loc.getWorld(),
+                    MainX, MainY, MainZ);
+            loc.getWorld().getBlockAt(MainX + 6, MainY + 0, MainZ + 2).setType(Material.CHEST);
+            // Mob spawn
+            if (!HerobrineOld.isNPCDisabled) {
+                if (HerobrineOld.getPluginCore().getConfigDB().UseNPC_Guardian) {
+                    Location mobloc = new Location(loc.getWorld(), MainX + 6, MainY + 0, MainZ + 4);
+                    for (int i = 1; i <= HerobrineOld.getPluginCore().getConfigDB().npc.getInt("npc.Guardian.SpawnCount"); i++) {
+                        HerobrineOld.getPluginCore().getEntityManager().spawnCustomZombie(mobloc, MobType.ARTIFACT_GUARDIAN);
+                    }
+                }
+            }
+            // Chest
+            Random generator = Utils.getRandomGen();
+            int chance = generator.nextInt(15);
+            ItemStack item = null;
+            ArrayList<String> newLore = new ArrayList<String>();
 
-			Chest chest = (Chest) loc.getWorld().getBlockAt(MainX + 6, MainY + 0, MainZ + 2).getState();
-			chest.getBlockInventory().setItem(chest.getInventory().firstEmpty(), item);
-		}
-	}
+            if (chance < 4 && HerobrineOld.getPluginCore().getConfigDB().UseArtifactBow) {
+
+                item = new ItemStack(Material.BOW);
+                newLore.add("Herobrine artifact");
+                newLore.add("Bow of Teleporting");
+                item = ItemName.setNameAndLore(item, "Bow of Teleporting", newLore);
+                item.addEnchantment(Enchantment.ARROW_FIRE, 1);
+                item.addEnchantment(Enchantment.ARROW_KNOCKBACK, 1);
+
+            } else if (chance < 8 && HerobrineOld.getPluginCore().getConfigDB().UseArtifactSword) {
+
+                item = new ItemStack(Material.DIAMOND_SWORD);
+                newLore.add("Herobrine artifact");
+                newLore.add("Sword of Lightning");
+                item = ItemName.setNameAndLore(item, "Sword of Lightning", newLore);
+                item.addEnchantment(Enchantment.KNOCKBACK, 2);
+                item.addEnchantment(Enchantment.DAMAGE_ALL, 2);
+                item.addEnchantment(Enchantment.DURABILITY, 3);
+
+            } else if (chance < 12 && HerobrineOld.getPluginCore().getConfigDB().UseArtifactApple) {
+
+                item = new ItemStack(Material.GOLDEN_APPLE);
+                newLore.add("Herobrine artifact");
+                newLore.add("Apple of Death");
+                item = ItemName.setNameAndLore(item, "Apple of Death", newLore);
+
+            } else {
+                if (HerobrineOld.getPluginCore().getConfigDB().UseAncientSword) {
+                    item = HerobrineOld.getPluginCore().getAICore().createAncientSword();
+                    item.addEnchantment(Enchantment.KNOCKBACK, 2);
+                    item.addEnchantment(Enchantment.DAMAGE_ALL, 2);
+                }
+            }
+
+            Chest chest = (Chest) loc.getWorld().getBlockAt(MainX + 6, MainY + 0, MainZ + 2).getState();
+            chest.getBlockInventory().setItem(chest.getInventory().firstEmpty(), item);
+        }
+    }
 
 }
