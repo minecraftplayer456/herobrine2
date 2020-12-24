@@ -6,7 +6,4 @@ website: https://www.theprogrammersworld.net
 api-version: 1.16
 load: STARTUP
 commands:
-    herobrine:
-      description: Main command.
-      usage: /herobrine help
-      aliases: [hero, hb]
+  test:
