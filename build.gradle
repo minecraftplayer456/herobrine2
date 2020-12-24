@@ -15,6 +15,7 @@ repositories {
     */
     maven { url = 'https://oss.sonatype.org/content/repositories/snapshots' }
     maven { url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
+    maven { url "https://repo.dmulloy2.net/nexus/repository/public/" }
     mavenLocal() // This is needed for CraftBukkit and Spigot.
 
     // libs folder (TODO: transfer away from this!)
@@ -33,6 +34,7 @@ version "2.1.2"
 
 dependencies {
     compileOnly 'org.spigotmc:spigot:1.16.4-R0.1-SNAPSHOT'  // The full Spigot server with no shadowing. Requires mavenLocal.
+    compileOnly group: "com.comphenix.protocol", name: "ProtocolLib", version: "4.5.0"
     implementation name: 'Factions'
     implementation name: 'GriefPrevention'
     implementation name: 'MassiveCore'
