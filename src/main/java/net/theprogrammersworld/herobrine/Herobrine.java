@@ -1,10 +1,9 @@
 package net.theprogrammersworld.herobrine;
 
-import net.theprogrammersworld.herobrine.npc.HumanEntity;
-import net.theprogrammersworld.herobrine.util.RandomUtil;
+import net.theprogrammersworld.herobrine.npc.NPCCore;
+import net.theprogrammersworld.herobrine.npc.human.HumanNPC;
 import net.theprogrammersworld.herobrine.util.debug.Debug;
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -15,6 +14,7 @@ public class Herobrine extends JavaPlugin implements Listener {
 
     private ConfigDB configDB;
     private Debug debug;
+    private NPCCore npcCore;
 
     @Override
     public void onEnable() {
@@ -28,6 +28,9 @@ public class Herobrine extends JavaPlugin implements Listener {
         //Set configured logLevel
         debug.setLevel(configDB.logLevel);
 
+        //Initialize npc engine
+        npcCore = new NPCCore();
+
         //Register this class as event listener
         getServer().getPluginManager().registerEvents(this, this);
     }
@@ -37,15 +40,12 @@ public class Herobrine extends JavaPlugin implements Listener {
         if (label.equalsIgnoreCase("test")) {
             Player player = (Player) sender;
 
-            HumanEntity entity = new HumanEntity("Hello world!");
-            entity.spawn(player.getLocation());
+            HumanNPC npc = npcCore.createHumanNPC("Ho");
+            npc.getEntity().spawn(player.getLocation());
 
-            Bukkit.getScheduler().runTaskTimer(this, () -> {
-                final Location nextLocation = entity.getLocation().clone();
-                entity.moveTo(nextLocation.add(RandomUtil.ranIntWithNegative(0, 8), RandomUtil.ranIntWithNegative(0, 8), RandomUtil.ranIntWithNegative(0, 8)));
-
-                sender.sendMessage("Test!");
-            }, 20 * 3L, 1);
+            Bukkit.getScheduler().runTaskLater(this, () -> {
+                npc.getEntity().destroy();
+            }, 20 * 3L);
 
             sender.sendMessage("Created npc!");
         }

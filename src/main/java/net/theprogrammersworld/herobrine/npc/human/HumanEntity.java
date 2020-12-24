@@ -1,4 +1,4 @@
-package net.theprogrammersworld.herobrine.npc;
+package net.theprogrammersworld.herobrine.npc.human;
 
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.wrappers.EnumWrappers;
@@ -6,10 +6,7 @@ import com.comphenix.protocol.wrappers.PlayerInfoData;
 import com.comphenix.protocol.wrappers.WrappedChatComponent;
 import com.comphenix.protocol.wrappers.WrappedGameProfile;
 import com.mojang.authlib.GameProfile;
-import net.theprogrammersworld.herobrine.network.wrapper.WrapperPlayServerEntityTeleport;
-import net.theprogrammersworld.herobrine.network.wrapper.WrapperPlayServerNamedEntitySpawn;
-import net.theprogrammersworld.herobrine.network.wrapper.WrapperPlayServerPlayerInfo;
-import net.theprogrammersworld.herobrine.network.wrapper.WrapperPlayServerRelEntityMove;
+import net.theprogrammersworld.herobrine.network.wrapper.*;
 import net.theprogrammersworld.herobrine.util.exceptions.EntityException;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -35,33 +32,59 @@ public class HumanEntity {
 
     public void spawn(Location location) {
         this.location = location;
-        Bukkit.getOnlinePlayers().forEach(this::sendEntityToPlayer);
+        Bukkit.getOnlinePlayers().forEach(this::addToPlayer);
     }
 
-    public void sendEntityToPlayer(Player player) {
-        final WrapperPlayServerNamedEntitySpawn namedEntitySpawnPacket = new WrapperPlayServerNamedEntitySpawn();
-        namedEntitySpawnPacket.setEntityID(entityId);
-        namedEntitySpawnPacket.setPlayerUUID(gameProfile.getId());
-        namedEntitySpawnPacket.setX(location.getX());
-        namedEntitySpawnPacket.setY(location.getY());
-        namedEntitySpawnPacket.setZ(location.getZ());
-        namedEntitySpawnPacket.setYaw(location.getYaw());
-        namedEntitySpawnPacket.setPitch(location.getYaw());
+    public void addToPlayer(Player player) {
+        final WrapperPlayServerNamedEntitySpawn entitySpawnPacket = new WrapperPlayServerNamedEntitySpawn();
+        entitySpawnPacket.setEntityID(entityId);
+        entitySpawnPacket.setPlayerUUID(gameProfile.getId());
+        entitySpawnPacket.setX(location.getX());
+        entitySpawnPacket.setY(location.getY());
+        entitySpawnPacket.setZ(location.getZ());
+        entitySpawnPacket.setYaw(location.getYaw());
+        entitySpawnPacket.setPitch(location.getYaw());
 
         final WrapperPlayServerPlayerInfo playerInfoPacket = new WrapperPlayServerPlayerInfo();
         final List<PlayerInfoData> playerDataList = new ArrayList<>();
         final PlayerInfoData playerData = new PlayerInfoData(WrappedGameProfile.fromHandle(gameProfile),
                 1, EnumWrappers.NativeGameMode.NOT_SET,
                 WrappedChatComponent.fromText(gameProfile.getName()));
+
         playerDataList.add(playerData);
         playerInfoPacket.setData(playerDataList);
         playerInfoPacket.setAction(EnumWrappers.PlayerInfoAction.ADD_PLAYER);
 
         try {
             ProtocolLibrary.getProtocolManager().sendServerPacket(player, playerInfoPacket.getHandle(), false);
-            ProtocolLibrary.getProtocolManager().sendServerPacket(player, namedEntitySpawnPacket.getHandle(), false);
+            ProtocolLibrary.getProtocolManager().sendServerPacket(player, entitySpawnPacket.getHandle(), false);
         } catch (InvocationTargetException e) {
-            throw new EntityException("Could not send spawn packets", e);
+            throw new EntityException("Could not send entity spawn packets", e);
+        }
+    }
+
+    public void destroy() {
+        Bukkit.getOnlinePlayers().forEach(this::removeFromPlayer);
+    }
+
+    public void removeFromPlayer(Player player) {
+        final WrapperPlayServerEntityDestroy entityDestroyPacket = new WrapperPlayServerEntityDestroy();
+        entityDestroyPacket.setEntityIds(new int[]{entityId});
+
+        final WrapperPlayServerPlayerInfo playerInfoPacket = new WrapperPlayServerPlayerInfo();
+        final List<PlayerInfoData> playerDataList = new ArrayList<>();
+        final PlayerInfoData playerData = new PlayerInfoData(WrappedGameProfile.fromHandle(gameProfile),
+                1, EnumWrappers.NativeGameMode.NOT_SET, WrappedChatComponent.fromText(gameProfile.getName()));
+
+        playerDataList.add(playerData);
+        playerInfoPacket.setData(playerDataList);
+        playerInfoPacket.setAction(EnumWrappers.PlayerInfoAction.REMOVE_PLAYER);
+
+        try {
+            ProtocolLibrary.getProtocolManager().sendServerPacket(player, entityDestroyPacket.getHandle(), false);
+            ProtocolLibrary.getProtocolManager().sendServerPacket(player, playerInfoPacket.getHandle(), false);
+        } catch (InvocationTargetException e) {
+            throw new EntityException("Could not send entity destroy packets", e);
         }
     }
 
