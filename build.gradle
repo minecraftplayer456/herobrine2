@@ -32,9 +32,15 @@ java {
 group "herobrine"
 version "2.1.2"
 
+configurations {
+    pluginDependency {
+        extendsFrom compileOnly
+    }
+}
+
 dependencies {
     compileOnly 'org.spigotmc:spigot:1.16.4-R0.1-SNAPSHOT'  // The full Spigot server with no shadowing. Requires mavenLocal.
-    compileOnly group: "com.comphenix.protocol", name: "ProtocolLib", version: "4.5.0"
+    pluginDependency group: "com.comphenix.protocol", name: "ProtocolLib", version: "4.5.0"
     implementation name: 'Factions'
     implementation name: 'GriefPrevention'
     implementation name: 'MassiveCore'
@@ -46,7 +52,18 @@ dependencies {
     implementation name: 'WorldGuard'
 }
 
-task copyPluginJar(dependsOn: jar, type: Copy){
+def pluginDir = projectDir.path + "/run/plugins"
+
+task copyPluginJar(type: Copy){
     from(jar.archiveFile)
-    into(projectDir.path + "/run/plugins")
+    into(pluginDir)
+}
+
+task copyDependencyJars(type: Copy){
+    def transitivePluginDependencies = configurations.pluginDependency.copy()
+    transitivePluginDependencies.transitive = false
+    transitivePluginDependencies.forEach {
+        from(it)
+        into(pluginDir)
+    }
 }
