@@ -6,7 +6,11 @@ import org.apache.logging.log4j.Logger;
 
 //TODO send log to players with command /herobrine debug [level]
 public class Debug {
+    private static final String DEBUG_SUFFIX = "[DEBUG] ";
+    private static final String TRACE_SUFFIX = "[TRACE] ";
+
     private final Logger log = LogManager.getLogger("Herobrine");
+
     private DebugLevel level;
 
     public void log(DebugLevel level, String msg, Object... args) {
@@ -52,19 +56,19 @@ public class Debug {
     }
 
     public void debug(String msg) {
-        log(DebugLevel.Debug, msg);
+        log(DebugLevel.Debug, DEBUG_SUFFIX + msg);
     }
 
     public void debug(String msg, Object... args) {
-        log(DebugLevel.Debug, msg, args);
+        log(DebugLevel.Debug, DEBUG_SUFFIX + msg, args);
     }
 
     public void trace(String msg) {
-        log(DebugLevel.Trace, msg);
+        log(DebugLevel.Trace, TRACE_SUFFIX + msg);
     }
 
     public void trace(String msg, Object... args) {
-        log(DebugLevel.Trace, msg, args);
+        log(DebugLevel.Trace, TRACE_SUFFIX + msg, args);
     }
 
     public void setLevel(DebugLevel level) {
