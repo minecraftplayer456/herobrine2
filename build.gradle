@@ -33,8 +33,9 @@ group "herobrine"
 version "2.1.2"
 
 configurations {
-    pluginDependency {
-        extendsFrom compileOnly
+    pluginDependency
+    compileOnly{
+        extendsFrom pluginDependency
     }
 }
 
