@@ -1,7 +1,10 @@
 package net.theprogrammersworld.herobrine;
 
-import net.theprogrammersworld.herobrine.test.TestNPC;
+import net.theprogrammersworld.herobrine.npc.HumanEntity;
+import net.theprogrammersworld.herobrine.util.RandomUtil;
 import net.theprogrammersworld.herobrine.util.debug.Debug;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -34,8 +37,15 @@ public class Herobrine extends JavaPlugin implements Listener {
         if (label.equalsIgnoreCase("test")) {
             Player player = (Player) sender;
 
-            TestNPC npc = new TestNPC("Hello World!", player.getWorld());
-            npc.spawn(player.getLocation());
+            HumanEntity entity = new HumanEntity("Hello world!");
+            entity.spawn(player.getLocation());
+
+            Bukkit.getScheduler().runTaskTimer(this, () -> {
+                final Location nextLocation = entity.getLocation().clone();
+                entity.moveTo(nextLocation.add(RandomUtil.ranIntWithNegative(0, 8), RandomUtil.ranIntWithNegative(0, 8), RandomUtil.ranIntWithNegative(0, 8)));
+
+                sender.sendMessage("Test!");
+            }, 20 * 3L, 1);
 
             sender.sendMessage("Created npc!");
         }

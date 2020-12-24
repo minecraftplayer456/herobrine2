@@ -16,10 +16,10 @@ import java.util.logging.Logger;
 public class BServer {
 
     private static BServer ins;
-    private MinecraftServer mcServer;
-    private CraftServer cServer;
     private final Server server;
     private final HashMap<String, BWorld> worlds = new HashMap<String, BWorld>();
+    private MinecraftServer mcServer;
+    private CraftServer cServer;
 
     private BServer() {
         server = Bukkit.getServer();

@@ -17,6 +17,7 @@ public class ConfigDBOld {
 
     final public String pluginVersionString = Bukkit.getServer().getPluginManager().getPlugin("Herobrine")
             .getDescription().getVersion();
+    private final Logger log;
     public YamlConfiguration config;
     public YamlConfiguration npc;
     public int ShowRate = 2;
@@ -86,12 +87,11 @@ public class ConfigDBOld {
     public String HerobrineWorldName = "world_herobrine_graveyard";
     public boolean ShowInTabList = false;
     public boolean CheckForUpdates = true;
-
     public boolean newVersionFound = false;
     public File configF = new File("plugins/Herobrine/config.yml");
     public File npcF = new File("plugins/Herobrine/npc.yml");
-    private final Logger log;
     private boolean isStartupDone = false;
+
     public ConfigDBOld(Logger l) {
         this.log = l;
     }

@@ -23,12 +23,12 @@ import java.util.UUID;
 public class NPCCore {
 
     public static JavaPlugin plugin;
-    public boolean isInLoaded = false;
     private final ArrayList<HumanNPC> npcs = new ArrayList<HumanNPC>();
     private final BServer server;
-    private int taskid;
     private final Map<World, BWorld> bworlds = new HashMap<World, BWorld>();
     private final NetworkCore networkCore;
+    public boolean isInLoaded = false;
+    private int taskid;
     private int lastID = 0;
 
     private GameProfile HerobrineGameProfile = getHerobrineGameProfile();

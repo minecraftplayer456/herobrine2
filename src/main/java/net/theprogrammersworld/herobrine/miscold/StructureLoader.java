@@ -13,10 +13,10 @@ import java.nio.charset.StandardCharsets;
 
 public class StructureLoader {
 
-    private int current = 0;
-    private int length = 0;
     private final InputStream inp;
     private final YamlConfiguration file;
+    private int current = 0;
+    private int length = 0;
 
     public StructureLoader(InputStream in) {
         inp = in;

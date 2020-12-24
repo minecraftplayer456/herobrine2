@@ -18,11 +18,11 @@ import java.util.logging.Logger;
 
 public class CmdExecutor implements CommandExecutor {
 
-    private Logger log = null;
     private final HashMap<String, SubCommand> subCommands = new HashMap<String, SubCommand>();
     private final String[] helpCommandOrder = {
             "reload", "pluginreport", "cancel", "allworlds", "position", "attack", "haunt", "heads",
             "bury", "curse", "burn", "pyramid", "cave", "temple", "graveyard", "speakrandom", "speak"};
+    private Logger log = null;
 
     public CmdExecutor(HerobrineOld p) {
         log = HerobrineOld.log;

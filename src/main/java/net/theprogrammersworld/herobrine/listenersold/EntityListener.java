@@ -20,9 +20,9 @@ import java.util.Random;
 
 public class EntityListener implements Listener {
 
-    private ItemStack itemInHand = null;
     private final ArrayList<String> equalsLore = new ArrayList<String>();
     private final ArrayList<String> equalsLoreS = new ArrayList<String>();
+    private ItemStack itemInHand = null;
     private ArrayList<String> getLore = new ArrayList<String>();
     private HerobrineOld PluginCore = null;
 

@@ -6,13 +6,13 @@ import org.bukkit.Location;
 
 public class Support {
 
+    private final boolean B_RedProtect = false;
     private boolean B_Residence = false;
     private boolean B_GriefPrevention = false;
     private boolean B_Towny = false;
     private boolean B_WorldGuard = false;
     private boolean B_PreciousStones = false;
     private boolean B_Factions = false;
-    private final boolean B_RedProtect = false;
     private ResidenceHook ResidenceCore = null;
     private GriefPreventionHook GriefPreventionCore = null;
     private TownyHook TownyCore = null;
