@@ -11,6 +11,7 @@ import net.theprogrammersworld.herobrine.util.exceptions.EntityException;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+import org.bukkit.util.Vector;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -119,6 +120,16 @@ public class HumanEntity {
         teleportPacket.setPitch(location.getPitch());
 
         ProtocolLibrary.getProtocolManager().broadcastServerPacket(teleportPacket.getHandle());
+    }
+
+    public void setVelocity(Vector velocity) {
+        final WrapperPlayServerEntityVelocity entityVelocityPacket = new WrapperPlayServerEntityVelocity();
+        entityVelocityPacket.setEntityID(entityId);
+        entityVelocityPacket.setVelocityX(velocity.getX());
+        entityVelocityPacket.setVelocityY(velocity.getY());
+        entityVelocityPacket.setVelocityZ(velocity.getZ());
+
+        ProtocolLibrary.getProtocolManager().broadcastServerPacket(entityVelocityPacket.getHandle());
     }
 
     public int getEntityId() {
