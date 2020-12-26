@@ -3,6 +3,8 @@
 !!!There is the bitbukkit repository (https://bitbucket.org/Minecraftplayer456/herobrine-2)
 and the github repository (https://github.com/minecraftplayer456/herobrine2) for this project!!!
 
+The commits will be on both repositories
+
 # Herobrine 2 #
 
 ----
