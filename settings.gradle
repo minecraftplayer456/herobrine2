@@ -8,3 +8,6 @@
  */
 
 rootProject.name = 'herobrine2'
+include 'api'
+include 'nms'
+include 'plugin'

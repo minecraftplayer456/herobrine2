@@ -1,72 +1,28 @@
-plugins {
-    id 'java-library'
-}
+allprojects {
+    apply plugin: 'java-library'
 
-repositories {
-    mavenCentral() // This is needed for dependencies.
-    /*
-	   As Spigot-API depends on the Bungeecord ChatComponent-API,
-	   we need to add the Sonatype OSS repository, as Gradle,
-	   in comparison to maven, doesn't want to understand the ~/.m2
-	   directory unless added using mavenLocal(). Maven usually just gets
-	   it from there, as most people have run the BuildTools at least once.
-	   This is therefore not needed if you're using the full Spigot/CraftBukkit,
-	   or if you're using the Bukkit API.
-    */
-    maven { url = 'https://oss.sonatype.org/content/repositories/snapshots' }
-    maven { url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
-    maven { url "https://repo.dmulloy2.net/nexus/repository/public/" }
-    mavenLocal() // This is needed for CraftBukkit and Spigot.
+    repositories {
+        mavenCentral()
+        //Craftbukkit and Spigot
+        mavenLocal()
+        //Bungeecord CharComponent-API as Spigot-API dependency
+        maven { url = 'https://oss.sonatype.org/content/repositories/snapshots' }
+        //Spigot repository
+        maven { url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
+        //Protocollib repository
+        maven { url "https://repo.dmulloy2.net/nexus/repository/public/" }
 
-    // libs folder (TODO: transfer away from this!)
-    flatDir {
-        dirs 'libs'
+        //Lib folder
+        flatDir {
+            dirs rootDir.path + '/libs'
+        }
     }
-}
 
-java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
-}
+    group "herobrine"
+    version "2.1.2"
 
-group "herobrine"
-version "2.1.2"
-
-configurations {
-    pluginDependency
-    compileOnly {
-        extendsFrom pluginDependency
-    }
-}
-
-dependencies {
-    // The full Spigot server with no shadowing. Requires mavenLocal.
-    compileOnly 'org.spigotmc:spigot:1.16.4-R0.1-SNAPSHOT'
-    // pluginDependency group: "com.comphenix.protocol", name: "ProtocolLib", version: "4.5.0"
-    pluginDependency name: 'ProtocolLib'
-    implementation name: 'Factions'
-    implementation name: 'GriefPrevention'
-    implementation name: 'MassiveCore'
-    implementation name: 'PreciousStones'
-    implementation name: 'RedProtect'
-    implementation name: 'Residence'
-    implementation name: 'Towny'
-    implementation name: 'WorldEdit'
-    implementation name: 'WorldGuard'
-}
-
-def pluginDir = projectDir.path + "/run/plugins"
-
-task copyPluginJar(type: Copy) {
-    from(jar.archiveFile)
-    into(pluginDir)
-}
-
-task copyDependencyJars(type: Copy) {
-    def transitivePluginDependencies = configurations.pluginDependency.copy()
-    transitivePluginDependencies.transitive = false
-    transitivePluginDependencies.forEach {
-        from(it)
-        into(pluginDir)
+    java {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
 }

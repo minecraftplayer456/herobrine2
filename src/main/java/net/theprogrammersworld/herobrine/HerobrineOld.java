@@ -17,7 +17,6 @@ import net.theprogrammersworld.herobrine.entityold.CustomZombie;
 import net.theprogrammersworld.herobrine.entityold.EntityManager;
 import net.theprogrammersworld.herobrine.listenersold.*;
 import net.theprogrammersworld.herobrine.miscold.UpdateScanner;
-import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

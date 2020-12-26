@@ -1,7 +1,6 @@
 package net.theprogrammersworld.herobrine.test;
 
 import com.mojang.authlib.GameProfile;
-import net.minecraft.server.v1_16_R3.*;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;

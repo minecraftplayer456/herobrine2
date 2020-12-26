@@ -1,7 +1,5 @@
 package net.theprogrammersworld.herobrine.test;
 
-import io.netty.channel.*;
-
 import java.net.SocketAddress;
 
 public class TestEmptyChannel extends AbstractChannel {

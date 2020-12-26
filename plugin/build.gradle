@@ -1,0 +1,51 @@
+configurations {
+    pluginDependency
+    optionalPluginDependency
+    compileOnly {
+        extendsFrom pluginDependency
+        extendsFrom optionalPluginDependency
+    }
+}
+
+archivesBaseName = "herobrine2"
+
+dependencies {
+    compile project(":nms")
+    compileOnly 'org.spigotmc:spigot:1.16.4-R0.1-SNAPSHOT'
+    pluginDependency name: 'ProtocolLib'
+    optionalPluginDependency name: 'Factions'
+    optionalPluginDependency name: 'GriefPrevention'
+    optionalPluginDependency name: 'MassiveCore'
+    optionalPluginDependency name: 'PreciousStones'
+    optionalPluginDependency name: 'RedProtect'
+    optionalPluginDependency name: 'Residence'
+    optionalPluginDependency name: 'Towny'
+    optionalPluginDependency name: 'WorldEdit'
+    optionalPluginDependency name: 'WorldGuard'
+}
+
+def copyOptionalPluginDependencies = false
+def pluginDir = rootDir.path + "/run/plugins"
+
+task copyPluginJar(type: Copy) {
+    from(jar.archiveFile)
+    into(pluginDir)
+}
+
+task copyDependencyJars(type: Copy) {
+    def transitivePluginDependencies = configurations.pluginDependency.copy()
+    transitivePluginDependencies.transitive = false
+    transitivePluginDependencies.forEach {
+        from(it)
+        into(pluginDir)
+    }
+
+    if(copyOptionalPluginDependencies){
+        def transitiveOptionalPluginDependencies = configurations.optionalPluginDependency.copy()
+        transitiveOptionalPluginDependencies.transitive = false
+        transitiveOptionalPluginDependencies.forEach {
+            from(it)
+            into(pluginDir)
+        }
+    }
+}

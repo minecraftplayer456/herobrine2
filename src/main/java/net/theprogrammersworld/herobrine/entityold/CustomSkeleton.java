@@ -1,6 +1,5 @@
 package net.theprogrammersworld.herobrine.entityold;
 
-import net.minecraft.server.v1_16_R3.*;
 import net.theprogrammersworld.herobrine.HerobrineOld;
 import net.theprogrammersworld.herobrine.miscold.ItemName;
 import org.bukkit.Color;

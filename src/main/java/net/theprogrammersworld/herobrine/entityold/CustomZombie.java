@@ -1,6 +1,5 @@
 package net.theprogrammersworld.herobrine.entityold;
 
-import net.minecraft.server.v1_16_R3.*;
 import net.theprogrammersworld.herobrine.HerobrineOld;
 import org.bukkit.Location;
 import org.bukkit.Material;

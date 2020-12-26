@@ -1,7 +1,6 @@
 package net.theprogrammersworld.herobrine.NPCold.Entity;
 
 import com.mojang.authlib.GameProfile;
-import net.minecraft.server.v1_16_R3.*;
 import net.theprogrammersworld.herobrine.NPCold.NMS.BWorld;
 import net.theprogrammersworld.herobrine.NPCold.NPCCore;
 import net.theprogrammersworld.herobrine.NPCold.Network.NetworkHandler;

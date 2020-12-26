@@ -1,6 +1,5 @@
 package net.theprogrammersworld.herobrine.NPCold.Entity;
 
-import net.minecraft.server.v1_16_R3.*;
 import net.theprogrammersworld.herobrine.HerobrineOld;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;

@@ -8,10 +8,8 @@ import net.theprogrammersworld.herobrine.entityold.MobType;
 import net.theprogrammersworld.herobrine.miscold.ItemName;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.*;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.inventory.ItemStack;
 

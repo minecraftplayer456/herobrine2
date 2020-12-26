@@ -1,7 +1,5 @@
 package net.theprogrammersworld.herobrine.nms.network;
 
-import io.netty.channel.*;
-
 import java.net.SocketAddress;
 
 public class EmptyChannel extends AbstractChannel {
