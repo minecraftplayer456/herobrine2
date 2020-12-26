@@ -1,3 +1,8 @@
+!!!This project is a fork of https://bitbucket.org/David-B/herobrine-2!!!
+
+!!!There is the bitbukkit repository (https://bitbucket.org/Minecraftplayer456/herobrine-2)
+and the github repository (https://github.com/minecraftplayer456/herobrine2) for this project!!!
+
 # Herobrine 2 #
 
 ----
