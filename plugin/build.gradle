@@ -24,6 +24,11 @@ dependencies {
     optionalPluginDependency name: 'WorldGuard'
 }
 
+jar {
+    dependsOn configurations.compile
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+}
+
 def copyOptionalPluginDependencies = false
 def pluginDir = rootDir.path + "/run/plugins"
 
@@ -40,7 +45,7 @@ task copyDependencyJars(type: Copy) {
         into(pluginDir)
     }
 
-    if(copyOptionalPluginDependencies){
+    if (copyOptionalPluginDependencies) {
         def transitiveOptionalPluginDependencies = configurations.optionalPluginDependency.copy()
         transitiveOptionalPluginDependencies.transitive = false
         transitiveOptionalPluginDependencies.forEach {
