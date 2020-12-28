@@ -1,7 +1,7 @@
-package net.theprogrammersworld.herobrine.util;
+package net.theprogrammersworld.herobrine.util.message;
 
-import net.theprogrammersworld.herobrine.api.util.IMessenger;
-import net.theprogrammersworld.herobrine.api.util.MessageLevel;
+import net.theprogrammersworld.herobrine.api.util.message.IMessenger;
+import net.theprogrammersworld.herobrine.api.util.message.MessageLevel;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -26,6 +26,44 @@ public class Messenger implements IMessenger {
         if (level.getLevel() >= this.level.getLevel()) {
             logger.log(getLog4JLevel(level), msg, args);
         }
+    }
+
+    @Override
+    public void logThrowable(MessageLevel level, String msg, Throwable throwable, Object... args) {
+        if (level.getLevel() >= this.level.getLevel()) {
+            logger.log(getLog4JLevel(level), msg, throwable, args);
+        }
+    }
+
+    @Override
+    public void catching(MessageLevel level, String msg, Throwable throwable, Object... args) {
+        StringBuilder builder = new StringBuilder();
+        builder.append(msg);
+        builder.append("\n");
+        builder.append("Catching: ");
+        builder.append("\n");
+        logThrowable(level, builder.toString(), throwable, args);
+    }
+
+    @Override
+    public void catching(String msg, Throwable throwable, Object... args) {
+        catching(MessageLevel.ERROR, msg, throwable, args);
+    }
+
+    @Override
+    public <T extends Throwable> T throwing(MessageLevel level, String msg, T throwable, Object... args) {
+        StringBuilder builder = new StringBuilder();
+        builder.append(msg);
+        builder.append("\n");
+        builder.append("Catching: ");
+        builder.append("\n");
+        logThrowable(level, builder.toString(), throwable, args);
+        return throwable;
+    }
+
+    @Override
+    public <T extends Throwable> T throwing(String msg, T throwable, Object... args) {
+        return throwing(MessageLevel.ERROR, msg, throwable, args);
     }
 
     @Override

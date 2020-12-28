@@ -1,4 +1,4 @@
-package net.theprogrammersworld.herobrine.api.util;
+package net.theprogrammersworld.herobrine.api.util.message;
 
 //TODO Translating
 //TODO Ingame chat messaging, command response
@@ -27,6 +27,16 @@ public interface IMessenger {
      * @see MessageLevel
      */
     void log(MessageLevel level, String msg, Object... args);
+
+    void logThrowable(MessageLevel level, String msg, Throwable throwable, Object... args);
+
+    void catching(MessageLevel level, String msg, Throwable throwable, Object... args);
+
+    void catching(String msg, Throwable throwable, Object... args);
+
+    <T extends Throwable> T throwing(MessageLevel level, String msg, T throwable, Object... args);
+
+    <T extends Throwable> T throwing(String msg, T throwable, Object... args);
 
     /**
      * Logs an formatted message with fatal level

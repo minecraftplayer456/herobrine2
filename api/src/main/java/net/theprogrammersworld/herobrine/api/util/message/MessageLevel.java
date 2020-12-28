@@ -1,4 +1,4 @@
-package net.theprogrammersworld.herobrine.api.util;
+package net.theprogrammersworld.herobrine.api.util.message;
 
 /**
  * Enum that represents the different levels a message can be send.
