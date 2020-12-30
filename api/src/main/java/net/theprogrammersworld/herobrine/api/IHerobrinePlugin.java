@@ -1,6 +1,7 @@
 package net.theprogrammersworld.herobrine.api;
 
-import net.theprogrammersworld.herobrine.api.util.IMessenger;
+import net.theprogrammersworld.herobrine.api.util.message.IMessenger;
+import net.theprogrammersworld.herobrine.api.util.settings.IHerobrineSettings;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 
@@ -12,7 +13,7 @@ import org.bukkit.plugin.Plugin;
  * @version 0.1.0
  * @since 2.1.2
  */
-public interface HerobrinePlugin extends Plugin, Listener {
+public interface IHerobrinePlugin extends Plugin, Listener {
 
     /**
      * Returns IMessenger instance for logging to console, chat, ...
@@ -24,4 +25,6 @@ public interface HerobrinePlugin extends Plugin, Listener {
      * @see IMessenger
      */
     IMessenger getMessenger();
+
+    IHerobrineSettings getSettings();
 }

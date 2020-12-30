@@ -19,7 +19,7 @@ public class CmdPosition extends SubCommand {
 
         sendMessage(player, ChatColor.GREEN + "[Herobrine] Position - "
                 + "World: " + loc.getWorld().getName()
-                + ", Coordinates: (" + (int) loc.getX() + ", " + (int) loc.getY() + ", " + (int) loc.getZ() + ")");
+                + ", Coordinates: (" + loc.getX() + ", " + loc.getY() + ", " + loc.getZ() + ")");
 
         return true;
     }

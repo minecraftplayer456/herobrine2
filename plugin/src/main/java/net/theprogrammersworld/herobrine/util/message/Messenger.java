@@ -23,15 +23,15 @@ public class Messenger implements IMessenger {
     @Override
     public void log(MessageLevel level, String msg, Object... args) {
         //If level is equal or higher than level of logger, message will be logged
-        if (level.getLevel() >= this.level.getLevel()) {
-            logger.log(getLog4JLevel(level), msg, args);
+        if (isLevel(level)) {
+            logger.log(getLog4JLevel(level), formatMessage(msg), args);
         }
     }
 
     @Override
     public void logThrowable(MessageLevel level, String msg, Throwable throwable, Object... args) {
-        if (level.getLevel() >= this.level.getLevel()) {
-            logger.log(getLog4JLevel(level), msg, throwable, args);
+        if (isLevel(level)) {
+            logger.log(getLog4JLevel(level), formatMessage(msg), throwable, args);
         }
     }
 
@@ -97,6 +97,42 @@ public class Messenger implements IMessenger {
     }
 
     @Override
+    public boolean isLevel(MessageLevel level) {
+        return level.getLevel() >= this.level.getLevel();
+    }
+
+    @Override
+    public boolean isFatal() {
+        return isLevel(MessageLevel.FATAL);
+    }
+
+    @Override
+    public boolean isError() {
+        return isLevel(MessageLevel.ERROR);
+    }
+
+    @Override
+    public boolean isWarn() {
+        return isLevel(MessageLevel.WARN);
+    }
+
+    @Override
+    public boolean isInfo() {
+        return isLevel(MessageLevel.INFO);
+    }
+
+    @Override
+    public boolean isDebug() {
+        return isLevel(MessageLevel.DEBUG);
+    }
+
+    @Override
+    public boolean isTrace() {
+        return isLevel(MessageLevel.TRACE);
+    }
+
+
+    @Override
     public MessageLevel getLevel() {
         return level;
     }
@@ -155,5 +191,14 @@ public class Messenger implements IMessenger {
         }
         //Should never reach
         return null;
+    }
+
+    private String formatMessage(String msg) {
+        StringBuilder builder = new StringBuilder();
+        builder.append("[");
+        builder.append(name);
+        builder.append("] ");
+        builder.append(msg);
+        return builder.toString();
     }
 }

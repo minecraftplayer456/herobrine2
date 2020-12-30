@@ -1,17 +1,18 @@
 package net.theprogrammersworld.herobrine.api;
 
-import net.theprogrammersworld.herobrine.api.util.IMessenger;
+import net.theprogrammersworld.herobrine.api.util.message.IMessenger;
+import net.theprogrammersworld.herobrine.api.util.settings.IHerobrineSettings;
 
 /**
  * Interface to the herobrine api
  *
  * @author Minecraftplayer456
  * @version 0.1.0
- * @see HerobrinePlugin
+ * @see IHerobrinePlugin
  * @since 2.1.2
  */
 public final class HerobrineApi {
-    private static HerobrinePlugin impl;
+    private static IHerobrinePlugin impl;
 
     private HerobrineApi() {
 
@@ -21,9 +22,9 @@ public final class HerobrineApi {
      * Gets the main herobrine plugin
      *
      * @return The main herobrine plugin
-     * @see HerobrinePlugin
+     * @see IHerobrinePlugin
      */
-    public static HerobrinePlugin getPlugin() {
+    public static IHerobrinePlugin getPlugin() {
         return getImplementation();
     }
 
@@ -37,7 +38,11 @@ public final class HerobrineApi {
         return getImplementation().getMessenger();
     }
 
-    private static HerobrinePlugin getImplementation() {
+    public static IHerobrineSettings getSettings() {
+        return getImplementation().getSettings();
+    }
+
+    private static IHerobrinePlugin getImplementation() {
         if (impl == null) {
             throw new IllegalStateException("Herobrine api implementation is not set. The herobrine plugin isn't loaded");
         }
@@ -47,12 +52,12 @@ public final class HerobrineApi {
     /**
      * Set the HerobrinePlugin implementation.
      * <p>
-     * This can be only set once. It must allways be set by the Herobrine main plugin class
+     * This can be only set once. It must always be set by the Herobrine main plugin class
      *
      * @param plugin HerobrinePlugin to be set as implementation
-     * @see HerobrinePlugin
+     * @see IHerobrinePlugin
      */
-    public static void setImplementation(HerobrinePlugin plugin) {
+    public static void setImplementation(IHerobrinePlugin plugin) {
         if (impl != null) {
             throw new IllegalStateException("Herobrine api implementation can only be set once by the herobrine plugin");
         }

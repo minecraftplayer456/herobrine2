@@ -1,44 +1,21 @@
 package net.theprogrammersworld.herobrine;
 
 import net.theprogrammersworld.herobrine.api.HerobrineApi;
-import net.theprogrammersworld.herobrine.api.HerobrinePlugin;
-import net.theprogrammersworld.herobrine.api.util.IMessenger;
-import net.theprogrammersworld.herobrine.api.util.MessageLevel;
-import net.theprogrammersworld.herobrine.util.Messenger;
+import net.theprogrammersworld.herobrine.api.IHerobrinePlugin;
+import net.theprogrammersworld.herobrine.api.util.message.IMessenger;
+import net.theprogrammersworld.herobrine.api.util.settings.IHerobrineSettings;
+import net.theprogrammersworld.herobrine.util.message.Messenger;
+import net.theprogrammersworld.herobrine.util.settings.HerobrineSettings;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class Herobrine extends JavaPlugin implements HerobrinePlugin {
+public class Herobrine extends JavaPlugin implements IHerobrinePlugin {
 
-    private IMessenger messenger;
+    private static IHerobrinePlugin plugin;
 
-    @Override
-    public void onEnable() {
-        //Initialize messenger
-        messenger = new Messenger("Herobrine");
+    private Messenger messenger;
+    private HerobrineSettings settings;
 
-        //TODO Set through config file
-        messenger.setLevel(MessageLevel.TRACE);
-
-        //Initialize api
-        HerobrineApi.setImplementation(this);
-    }
-
-    @Override
-    public void onDisable() {
-
-    }
-
-    @Override
-    public IMessenger getMessenger() {
-        return messenger;
-    }
-
-    /*private static Herobrine plugin;
-
-    private ConfigDB configDB;
-    private Debug debug;
-
-    public static Herobrine getPlugin() {
+    public static IHerobrinePlugin getPlugin() {
         return plugin;
     }
 
@@ -46,44 +23,32 @@ public class Herobrine extends JavaPlugin implements HerobrinePlugin {
     public void onEnable() {
         plugin = this;
 
-        //Initializing debugging
-        debug = new Debug();
+        //Initialize api
+        HerobrineApi.setImplementation(this);
 
-        //Load configuration files
-        configDB = new ConfigDB();
-        configDB.startup(getDataFolder());
+        //Initialize messenger
+        messenger = new Messenger("Herobrine");
 
-        //Set configured logLevel
-        debug.setLevel(configDB.logLevel);
-
-        //Register this class as event listener
-        getServer().getPluginManager().registerEvents(this, this);
-    }
-
-    @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if (label.equalsIgnoreCase("test")) {
-            Player player = (Player) sender;
-
-            HumanEntity entity = new HumanEntity(player.getWorld(), "Herobrine");
-            entity.spawn(player.getLocation());
-
-            sender.sendMessage("Created npc!");
-        }
-        return false;
+        //Initialize configuration
+        settings = new HerobrineSettings(getDataFolder());
+        settings.load();
     }
 
     @Override
     public void onDisable() {
-        //Save configuration files
-        configDB.shutdown();
+        plugin = null;
+
+        //Save configuration
+        settings.save();
     }
 
-    public Debug getDebug() {
-        return debug;
+    @Override
+    public IMessenger getMessenger() {
+        return messenger;
     }
 
-    public ConfigDB getConfigDB() {
-        return configDB;
-    }*/
+    @Override
+    public IHerobrineSettings getSettings() {
+        return settings;
+    }
 }

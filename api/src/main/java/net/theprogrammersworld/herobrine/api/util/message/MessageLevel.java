@@ -14,76 +14,59 @@ public enum MessageLevel {
     /**
      * All messages will be logged
      */
-    ALL(0, "all"),
+    ALL(0),
 
     /**
      * All messages will be logged
      * <p>
      * Trace meaning: Messages, which will full spam the log
      */
-    TRACE(1, "trace"),
+    TRACE(1),
 
     /**
      * All messages will be logged except trace messages
      * <p>
      * Debug meaning: Messages, which will help to understand the problem, but are not normal information for a normal no errorring environment
      */
-    DEBUG(2, "debug"),
+    DEBUG(2),
 
     /**
      * All messages will be logged except trace and debug messages
      * <p>
      * Info meaning: Messages, which will tell something normal about the plugin
      */
-    INFO(3, "info"),
+    INFO(3),
 
     /**
      * Only warn, error and fatal messages will be logged
      * <p>
-     * Warn meaning: Something happened that the user shouzld know
+     * Warn meaning: Something happened that the user should know
      */
-    WARN(4, "warn"),
+    WARN(4),
 
     /**
      * Only error and fatal messages will be logged
      * <p>
      * Error meaning: An failure happened
      */
-    ERROR(5, "error"),
+    ERROR(5),
 
     /**
      * Only fatal messages will be logger
      * <p>
      * Fatal meaning: An fatal failure happened the plugin needs to shutdown
      */
-    FATAL(6, "fatal"),
+    FATAL(6),
 
     /**
      * None messages will be logged
      */
-    NONE(Integer.MAX_VALUE, "none");
+    NONE(Integer.MAX_VALUE);
 
     private final int level;
-    private final String name;
 
-    MessageLevel(int level, String name) {
+    MessageLevel(int level) {
         this.level = level;
-        this.name = name;
-    }
-
-    /**
-     * Return the enum constant that have the same internal name
-     *
-     * @param name The name of the enum constant to be returned
-     * @return the enum constant with that name
-     */
-    public static MessageLevel valueOfName(String name) {
-        for (final MessageLevel level : values()) {
-            if (level.name.equals(name)) {
-                return level;
-            }
-        }
-        throw new EnumConstantNotPresentException(MessageLevel.class, name);
     }
 
     /**
@@ -95,14 +78,5 @@ public enum MessageLevel {
      */
     public int getLevel() {
         return level;
-    }
-
-    /**
-     * Return name of the log level
-     *
-     * @return The name of the log level
-     */
-    public String getString() {
-        return name;
     }
 }
