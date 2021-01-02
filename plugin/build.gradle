@@ -29,28 +29,28 @@ jar {
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
 }
 
-def copyOptionalPluginDependencies = false
-def pluginDir = rootDir.path + "/run/plugins"
+println(copyOptionalPluginDependencies)
+println(pluginDir)
 
-task copyPluginJar(type: Copy) {
-    from(jar.archiveFile)
-    into(pluginDir)
-}
+task copyJarsToPluginDir(type: Copy){
+    //Plugin jar
+    from jar.archiveFile
 
-task copyDependencyJars(type: Copy) {
+    //Plugin dependency jars
     def transitivePluginDependencies = configurations.pluginDependency.copy()
     transitivePluginDependencies.transitive = false
     transitivePluginDependencies.forEach {
-        from(it)
-        into(pluginDir)
+        from it
     }
 
-    if (copyOptionalPluginDependencies) {
+    //Optional plugin dependency jars
+    if(copyOptionalPluginDependencies){
         def transitiveOptionalPluginDependencies = configurations.optionalPluginDependency.copy()
         transitiveOptionalPluginDependencies.transitive = false
         transitiveOptionalPluginDependencies.forEach {
             from(it)
-            into(pluginDir)
         }
     }
+
+    into pluginDir
 }

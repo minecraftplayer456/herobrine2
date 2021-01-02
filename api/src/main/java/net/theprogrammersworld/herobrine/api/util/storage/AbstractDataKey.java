@@ -1,9 +1,9 @@
 package net.theprogrammersworld.herobrine.api.util.storage;
 
-import net.theprogrammersworld.herobrine.api.HerobrineApi;
-
 import java.util.List;
 import java.util.Map;
+
+import net.theprogrammersworld.herobrine.api.HerobrineApi;
 
 public abstract class AbstractDataKey implements IDataKey {
     protected final String name;

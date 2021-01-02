@@ -1,4 +1,9 @@
 allprojects {
+    group "herobrine"
+    version "2.1.2"
+}
+
+subprojects{
     apply plugin: 'java-library'
 
     repositories {
@@ -18,11 +23,20 @@ allprojects {
         }
     }
 
-    group "herobrine"
-    version "2.1.2"
-
     java {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
+    configurations {
+        pluginDependency
+        optionalPluginDependency
+        compileOnly {
+            extendsFrom pluginDependency
+            extendsFrom optionalPluginDependency
+        }
+    }
+
+    pluginDir = new File(rootDir, pluginDir).path
+    copyOptionalPluginDependencies = Boolean.parseBoolean(copyOptionalPluginDependencies)
 }

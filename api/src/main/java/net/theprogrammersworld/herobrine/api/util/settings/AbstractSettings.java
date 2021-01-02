@@ -1,10 +1,10 @@
 package net.theprogrammersworld.herobrine.api.util.settings;
 
+import java.util.List;
+
 import net.theprogrammersworld.herobrine.api.HerobrineApi;
 import net.theprogrammersworld.herobrine.api.util.storage.IDataKey;
 import net.theprogrammersworld.herobrine.api.util.storage.IStorage;
-
-import java.util.List;
 
 public abstract class AbstractSettings implements ISettings {
 

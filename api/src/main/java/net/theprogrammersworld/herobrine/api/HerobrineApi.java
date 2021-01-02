@@ -1,5 +1,8 @@
 package net.theprogrammersworld.herobrine.api;
 
+import net.theprogrammersworld.herobrine.api.entity.IEntityCore;
+import net.theprogrammersworld.herobrine.api.network.INetworkCore;
+import net.theprogrammersworld.herobrine.api.nms.bridge.IBridge;
 import net.theprogrammersworld.herobrine.api.util.message.IMessenger;
 import net.theprogrammersworld.herobrine.api.util.settings.IHerobrineSettings;
 
@@ -40,6 +43,18 @@ public final class HerobrineApi {
 
     public static IHerobrineSettings getSettings() {
         return getImplementation().getSettings();
+    }
+
+    public static IBridge getBridge() {
+        return getImplementation().getBridge();
+    }
+
+    public static INetworkCore getNetworkCore() {
+        return getImplementation().getNetworkCore();
+    }
+
+    public static IEntityCore getEntityCore() {
+        return getImplementation().getEntityCore();
     }
 
     private static IHerobrinePlugin getImplementation() {

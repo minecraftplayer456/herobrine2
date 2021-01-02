@@ -1,10 +1,11 @@
 package net.theprogrammersworld.herobrine.api.util.storage;
 
-import net.theprogrammersworld.herobrine.api.HerobrineApi;
-import org.bukkit.configuration.InvalidConfigurationException;
-
 import java.io.File;
 import java.io.IOException;
+
+import org.bukkit.configuration.InvalidConfigurationException;
+
+import net.theprogrammersworld.herobrine.api.HerobrineApi;
 
 public abstract class AbstractFileStorage extends AbstractStorage implements IFileStorage {
     protected final File file;

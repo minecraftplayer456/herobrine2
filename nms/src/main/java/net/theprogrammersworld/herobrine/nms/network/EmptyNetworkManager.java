@@ -1,9 +1,9 @@
-package net.theprogrammersworld.herobrine.network;
+package net.theprogrammersworld.herobrine.nms.network;
+
+import java.net.SocketAddress;
 
 import net.minecraft.server.v1_16_R3.EnumProtocolDirection;
 import net.minecraft.server.v1_16_R3.NetworkManager;
-
-import java.net.SocketAddress;
 
 public class EmptyNetworkManager extends NetworkManager {
     public EmptyNetworkManager() {

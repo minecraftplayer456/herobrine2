@@ -1,9 +1,13 @@
 package net.theprogrammersworld.herobrine.api;
 
-import net.theprogrammersworld.herobrine.api.util.message.IMessenger;
-import net.theprogrammersworld.herobrine.api.util.settings.IHerobrineSettings;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
+
+import net.theprogrammersworld.herobrine.api.entity.IEntityCore;
+import net.theprogrammersworld.herobrine.api.network.INetworkCore;
+import net.theprogrammersworld.herobrine.api.nms.bridge.IBridge;
+import net.theprogrammersworld.herobrine.api.util.message.IMessenger;
+import net.theprogrammersworld.herobrine.api.util.settings.IHerobrineSettings;
 
 /**
  * Interface implemented by the main herobrine plugin class
@@ -27,4 +31,10 @@ public interface IHerobrinePlugin extends Plugin, Listener {
     IMessenger getMessenger();
 
     IHerobrineSettings getSettings();
+
+    IBridge getBridge();
+
+    INetworkCore getNetworkCore();
+
+    IEntityCore getEntityCore();
 }

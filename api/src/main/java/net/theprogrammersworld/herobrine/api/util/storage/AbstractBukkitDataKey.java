@@ -1,11 +1,11 @@
 package net.theprogrammersworld.herobrine.api.util.storage;
 
-import org.bukkit.configuration.ConfigurationSection;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+import org.bukkit.configuration.ConfigurationSection;
 
 public abstract class AbstractBukkitDataKey extends AbstractDataKey {
     protected final ConfigurationSection root;

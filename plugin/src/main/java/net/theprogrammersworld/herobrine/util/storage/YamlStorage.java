@@ -1,15 +1,16 @@
 package net.theprogrammersworld.herobrine.util.storage;
 
-import net.theprogrammersworld.herobrine.api.util.storage.AbstractBukkitDataKey;
-import net.theprogrammersworld.herobrine.api.util.storage.AbstractFileStorage;
-import net.theprogrammersworld.herobrine.api.util.storage.IDataKey;
+import java.io.File;
+import java.io.IOException;
+import java.util.Map;
+
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.Map;
+import net.theprogrammersworld.herobrine.api.util.storage.AbstractBukkitDataKey;
+import net.theprogrammersworld.herobrine.api.util.storage.AbstractFileStorage;
+import net.theprogrammersworld.herobrine.api.util.storage.IDataKey;
 
 public class YamlStorage extends AbstractFileStorage {
     private final FileConfiguration config;

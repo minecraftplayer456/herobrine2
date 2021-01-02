@@ -1,8 +1,8 @@
-package net.theprogrammersworld.herobrine.network;
-
-import io.netty.channel.*;
+package net.theprogrammersworld.herobrine.nms.network;
 
 import java.net.SocketAddress;
+
+import io.netty.channel.*;
 
 public class EmptyChannel extends AbstractChannel {
     private final ChannelConfig config = new DefaultChannelConfig(this);
@@ -63,7 +63,7 @@ public class EmptyChannel extends AbstractChannel {
     }
 
     @Override
-    protected AbstractUnsafe newUnsafe() {
+    protected AbstractChannel.AbstractUnsafe newUnsafe() {
         return null;
     }
 

@@ -2,6 +2,7 @@ package net.theprogrammersworld.herobrine.util.message;
 
 import net.theprogrammersworld.herobrine.api.util.message.IMessenger;
 import net.theprogrammersworld.herobrine.api.util.message.MessageLevel;
+
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

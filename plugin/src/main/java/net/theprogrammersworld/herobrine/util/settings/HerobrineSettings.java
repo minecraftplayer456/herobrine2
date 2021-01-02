@@ -1,5 +1,9 @@
 package net.theprogrammersworld.herobrine.util.settings;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
 import net.theprogrammersworld.herobrine.Herobrine;
 import net.theprogrammersworld.herobrine.api.util.message.MessageLevel;
 import net.theprogrammersworld.herobrine.api.util.settings.AbstractSetting;
@@ -7,10 +11,6 @@ import net.theprogrammersworld.herobrine.api.util.settings.AbstractSettings;
 import net.theprogrammersworld.herobrine.api.util.settings.IHerobrineSettings;
 import net.theprogrammersworld.herobrine.api.util.settings.ISetting;
 import net.theprogrammersworld.herobrine.util.storage.YamlStorage;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 public class HerobrineSettings extends AbstractSettings implements IHerobrineSettings {
 

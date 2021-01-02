@@ -1,9 +1,9 @@
 package net.theprogrammersworld.herobrine.api.util.settings;
 
-import net.theprogrammersworld.herobrine.api.util.storage.IDataKey;
-
 import java.util.List;
 import java.util.Map;
+
+import net.theprogrammersworld.herobrine.api.util.storage.IDataKey;
 
 public abstract class AbstractSetting<T> implements ISetting<T> {
     protected final String path;
